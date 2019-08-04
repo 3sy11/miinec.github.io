@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>微服务的12个准则 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190220.html">
+
+        <meta name="author" content="Miinec" />
+        <meta name="keywords" content="微服务,规范" />
+        <meta name="description" content="THE TWELVE-FACTOR APP I. 基准代码 一份基准代码（Codebase），多份部署（deploy） II. 依赖 显式声明依赖关系（ dependency ） 像docker一样的方式隔离 III. 配置 在环境中存储配置 推荐将应用的配置存储于 环境变量 中（ env vars, env ）。 配置管理的另一个方面是分组。 IV. 后端服务 把后端服务(backing services)当作附加资源 应用不会区别对待本地或第三方服务。 对应用程序而言，两种都是附加资源，通过一个 url 或是其他存储在 配置 中的服务定位/服务证书来获取数据。 V. 构建，发布，运行 严格分离构建和运行 基准代码 转化为一份部署(非开发环境)需要以下三个阶段： 构建阶段 是指将代码仓库转化为可执行包的过程 …" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="微服务的12个准则"/>
+        <meta property="og:url" content="/pages/20190220.html"/>
+        <meta property="og:description" content="THE TWELVE-FACTOR APP I. 基准代码 一份基准代码（Codebase），多份部署（deploy） II. 依赖 显式声明依赖关系（ dependency ） 像docker一样的方式隔离 III. 配置 在环境中存储配置 推荐将应用的配置存储于 环境变量 中（ env vars, env ）。 配置管理的另一个方面是分组。 IV. 后端服务 把后端服务(backing services)当作附加资源 应用不会区别对待本地或第三方服务。 对应用程序而言，两种都是附加资源，通过一个 url 或是其他存储在 配置 中的服务定位/服务证书来获取数据。 V. 构建，发布，运行 严格分离构建和运行 基准代码 转化为一份部署(非开发环境)需要以下三个阶段： 构建阶段 是指将代码仓库转化为可执行包的过程 …"/>
+        <meta property="article:published_time" content="2019-02-20" />
+            <meta property="article:section" content="技能树" />
+            <meta property="article:tag" content="微服务" />
+            <meta property="article:tag" content="规范" />
+            <meta property="article:author" content="Miinec" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190220.html"
+                       rel="bookmark"
+                       title="Permalink to 微服务的12个准则">
+                        微服务的12个准则
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-02-20T00:00:00+08:00"> 周三 20 二月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/wei-fu-wu.html">微服务</a>
+        /
+	<a href="/tag/gui-fan.html">规范</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h1>THE TWELVE-FACTOR APP</h1>
+<h2>I. 基准代码</h2>
+<p>一份基准代码（Codebase），多份部署（deploy）</p>
+<h2>II. 依赖</h2>
+<p>显式声明依赖关系（ dependency ）
+像docker一样的方式隔离</p>
+<h2>III. 配置</h2>
+<p>在环境中存储配置
+推荐将应用的配置存储于 环境变量 中（ env vars, env ）。
+配置管理的另一个方面是分组。</p>
+<h2>IV. 后端服务</h2>
+<p>把后端服务(backing services)当作附加资源
+应用不会区别对待本地或第三方服务。 对应用程序而言，两种都是附加资源，通过一个 url 或是其他存储在 配置 中的服务定位/服务证书来获取数据。
+<img alt="部署可以按需加载或卸载资源。" src="https://www.12factor.net/images/attached-resources.png"></p>
+<h2>V. 构建，发布，运行</h2>
+<p>严格分离构建和运行
+基准代码 转化为一份部署(非开发环境)需要以下三个阶段：</p>
+<p>构建阶段 是指将代码仓库转化为可执行包的过程。构建时会使用指定版本的代码，获取和打包 依赖项，编译成二进制文件和资源文件。
+发布阶段 会将构建的结果和当前部署所需 配置 相结合，并能够立刻在运行环境中投入使用。
+运行阶段 （或者说“运行时”）是指针对选定的发布版本，在执行环境中启动一系列应用程序 进程。
+<img alt="构建，发布，运行" src="https://www.12factor.net/images/release.png"></p>
+<h2>VI. 进程</h2>
+<p>以一个或多个无状态进程运行应用
+应用的进程必须无状态且 无共享 。
+任何需要持久化的数据都要存储在后端服务内，比如数据库。</p>
+<h2>VII. 端口绑定</h2>
+<p>通过端口绑定(Port binding)来提供服务</p>
+<h2>VIII. 并发</h2>
+<p>通过进程模型进行扩展</p>
+<h2>IX. 易处理</h2>
+<p>快速启动和优雅终止可最大化健壮性。</p>
+<ul>
+<li>
+<p>进程 一旦接收 终止信号（SIGTERM） 就会优雅的终止 。就网络进程而言，<strong>优雅终止是指停止监听服务的端口，即拒绝所有新的请求，并继续执行当前已接收的请求，然后退出</strong>。此类型的进程所隐含的要求是HTTP请求大多都很短(不会超过几秒钟)，而在长时间轮询中，客户端在丢失连接后应该马上尝试重连。</p>
+</li>
+<li>
+<p>对于 worker 进程来说，优雅终止是指将当前任务退回队列。例如，RabbitMQ 中，worker 可以发送一个NACK信号。 Beanstalkd 中，任务终止并退回队列会在worker断开时自动触发。有<strong>锁机制</strong>的系统诸如 Delayed Job 则需要确定释放了系统资源。此类型的进程所隐含的要求是，任务都应该可重复执行 ， 这主要由将结果包装进事务或是使重复操作<strong>幂等</strong>来实现。</p>
+</li>
+</ul>
+<h2>X. 开发环境与线上环境等价</h2>
+<p>尽可能的保持开发，预发布，线上环境相同</p>
+<h2>XI. 日志</h2>
+<p>把日志当作事件流
+应用本身从不考虑存储自己的输出流。 不应该试图去写或者管理日志文件。相反，每一个运行的进程都会直接的标准输出（stdout）事件流。</p>
+<h2>XII. 管理进程</h2>
+<p>后台管理任务当作一次性进程运行
+一次性管理进程应该和正常的 常驻进程 使用同样的环境。这些管理进程和任何其他的进程一样使用相同的 代码 和 配置 ，基于某个 发布版本 运行。后台管理代码应该随其他应用程序代码一起发布，从而避免同步问题。</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
+    <li class="list-group-item"><a href="/pages/20190120.html">Python__slots__详解</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2019 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

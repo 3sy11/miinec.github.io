@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python__slots__详解 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190120.html">
+
+        <meta name="author" content="Miinec" />
+        <meta name="keywords" content="Python" />
+        <meta name="description" content="Slots的实现 class Member(object): # 定义描述器实现slots属性的查找 def __init__(self, i): self.i = i def __get__(self, obj, type=None): return obj._slotvalues[self.i] def __set__(self, obj, value): obj._slotvalues[self.i] = value class Type(type): # 使用元类实现slots def __new__(self, name, bases, namespace): slots = namespace.get(&#39;_slots_&#39;) if slots: for …" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python__slots__详解"/>
+        <meta property="og:url" content="/pages/20190120.html"/>
+        <meta property="og:description" content="Slots的实现 class Member(object): # 定义描述器实现slots属性的查找 def __init__(self, i): self.i = i def __get__(self, obj, type=None): return obj._slotvalues[self.i] def __set__(self, obj, value): obj._slotvalues[self.i] = value class Type(type): # 使用元类实现slots def __new__(self, name, bases, namespace): slots = namespace.get(&#39;_slots_&#39;) if slots: for …"/>
+        <meta property="article:published_time" content="2019-01-20" />
+            <meta property="article:section" content="技能树" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:author" content="Miinec" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190120.html"
+                       rel="bookmark"
+                       title="Permalink to Python__slots__详解">
+                        Python__slots__详解
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-01-20T00:00:00+08:00"> 周日 20 一月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2>Slots的实现</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># 定义描述器实现slots属性的查找</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">_slotvalues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">_slotvalues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">Type</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="c1"># 使用元类实现slots</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span>  <span class="n">namespace</span><span class="p">):</span>
+        <span class="n">slots</span> <span class="o">=</span> <span class="n">namespace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_slots_&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">slots</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">slot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slots</span><span class="p">):</span>
+                <span class="n">namespace</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">Member</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">original_init</span> <span class="o">=</span> <span class="n">namespace</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">)</span>
+            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="c1"># 创建_slotvalues列表和调用原来的__init__</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_slotvalues</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">slots</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">original_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                    <span class="n">original_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">namespace</span><span class="p">[</span><span class="s1">&#39;__init__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="fm">__init__</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+
+<span class="c1"># Python2与Python3使用元类的区别</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="vm">__metaclass__</span> <span class="o">=</span> <span class="n">Type</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">Object</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">Type</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">Object</span><span class="p">):</span>
+    <span class="n">_slots_</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>python对象中有个存在__dict__来存放所有属性，__slots__的作用是取代__dict___的，实现一个描述器（设计模式），从而对对象属性进行管理。</p>
+</blockquote>
+<h2>更快的属性访问速度</h2>
+<p>默认情况下，访问一个实例的属性是通过访问该实例的__dict__来实现的。如访问<code>a.x</code>就相当于访问<code>a.__dict__['x']</code>。为了便于理解，我粗略地将它拆分为四步：</p>
+<ul>
+<li>a.x</li>
+<li>a.<strong>dict</strong></li>
+<li>a.<strong>dict</strong>['x']</li>
+<li>结果</li>
+</ul>
+<p>从__slots__的实现可以得知，定义了__slots__的类会为每个属性创建一个描述器。访问属性时就直接调用这个描述器。在这里我将它拆分为三步：</p>
+<ul>
+<li>b.x</li>
+<li>member decriptor</li>
+<li>结果</li>
+</ul>
+<p>上文提到，访问__dict__和描述器的速度是相近的，而通过__dict__访问属性多了<code>a.__dict__['x']</code>字典访值一步（一个哈希函数的消耗）。由此可以推断出，使用了__slots__的类的属性访问速度比没有使用的要快。</p>
+<h2>减少内存消耗</h2>
+<p>Python内置的字典本质是一个哈希表，它是一种用空间换时间的数据结构。为了解决冲突的问题，<strong>当字典使用量超过2/3时，Python会根据情况进行2-4倍的扩容</strong>。由此可预见，取消__dict__的使用可以大幅减少实例的空间消耗。</p>
+<h2>使用笔记</h2>
+<h3>只有非字符串的迭代器可以赋值给__slots__</h3>
+<h3>关于slots的继承问题</h3>
+<ul>
+<li>父类有，子类没有：子类的实例还是会自动创建__dict__来存储属性，不过父类__slots__已有的属性不受影响。</li>
+<li>父类没有，子类有：虽然子类取消了__dict__，但继承父类后它会继续生成。同上面一样，__slots__已有的属性不受影响。</li>
+<li>父类有，子类有：只有子类的__slots__有效，访问父类有子类没有的属性依然会报错。</li>
+<li>多个拥有非空slots的父类：由于__slots__的实现不是简单的列表或字典，多个父类的非空__slots__不能直接合并，所以使用时会报错（即使多个父类的非空__slots__是相同的）。</li>
+<li>多个空slots的父类：这是关于slots使用多继承唯一办法。</li>
+<li>某些父类有，某些父类没有：跟第一种情况类似。</li>
+</ul>
+<p>为了正确使用__slots__，最好直接继承object。如有需要用到其他父类，则父类和子类都要定义slots，还要记得子类的slots会覆盖父类的slots。除非所有父类的slots都为空，否则不要使用多继承。</p>
+<h3>添加__dict__获取动态特性</h3>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="vm">__dict__</span>
+<span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+
+
+<h3>添加__weakref__获取弱引用功能</h3>
+<p>__slots__的实现不仅取消了__dict__的生成，也取消了__weakref__的生成。同样的，在__slots__将其添加可以重新获取弱引用这一功能。</p>
+<h3>不能通过类属性给实例设定默认值</h3>
+<p>定义了__slots__后，这个类的类属性都变为了描述器。如果给类属性赋值，就会把描述器给覆盖了。</p>
+<h3>namedtuple</h3>
+<p>利用内置的namedtuple不可变的特性，结合slots，能创建出一个轻量不可变的实例。(约等于一个元组的大小)</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">MyNt</span><span class="p">(</span><span class="n">namedtupele</span><span class="p">(</span><span class="s1">&#39;MyNt&#39;</span><span class="p">,</span> <span class="s1">&#39;bar baz&#39;</span><span class="p">)):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">MyNt</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span><span class="o">.</span><span class="n">bar</span>
+<span class="s1">&#39;r&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span><span class="o">.</span><span class="n">baz</span>
+<span class="s1">&#39;z&#39;</span>
+</pre></div>
+
+
+<p>当一个类需要创建大量实例时，可以使用__slots__来减少内存消耗。如果对访问属性的速度有要求，也可以酌情使用。另外可以利用slots的特性来限制实例的属性。而用在普通类身上时，使用__slots__后会丧失动态添加属性和弱引用的功能，进而引起其他错误，所以在一般情况下不要使用它。</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
+    <li class="list-group-item"><a href="/pages/20190120.html">Python__slots__详解</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2019 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
