@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>架构设计实践思路：什么是架构，怎么画架构图 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190920.html">
+
+        <meta name="author" content="Mii" />
+        <meta name="keywords" content="产品,架构,设计,方法论" />
+        <meta name="description" content="产品设计方法论，只是还缺少些图示" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="架构设计实践思路：什么是架构，怎么画架构图"/>
+        <meta property="og:url" content="/pages/20190920.html"/>
+        <meta property="og:description" content="产品设计方法论，只是还缺少些图示"/>
+        <meta property="article:published_time" content="2019-09-20" />
+            <meta property="article:section" content="文章归档" />
+            <meta property="article:tag" content="产品" />
+            <meta property="article:tag" content="架构" />
+            <meta property="article:tag" content="设计" />
+            <meta property="article:tag" content="方法论" />
+            <meta property="article:author" content="Mii" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190920.html"
+                       rel="bookmark"
+                       title="Permalink to 架构设计实践思路：什么是架构，怎么画架构图">
+                        架构设计实践思路：什么是架构，怎么画架构图
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-09-20T00:00:00+08:00"> 周五 20 九月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/chan-pin.html">产品</a>
+        /
+	<a href="/tag/jia-gou.html">架构</a>
+        /
+	<a href="/tag/she-ji.html">设计</a>
+        /
+	<a href="/tag/fang-fa-lun.html">方法论</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><a href="https://mp.weixin.qq.com/s/eGNbRFKAli35CJu4aYN_4w">原文</a></p>
+<p>架构是一种整体与局部关系的抽象描述</p>
+<h2>架构域的分类</h2>
+<h3>业务架构</h3>
+<p>问题域，是指自己的产品能够解决的所有问题的空间集合。从核心需求出发，将所有当前需要解决、未来可能要解决的问题放入产品框架的范围。能够帮助我们的产品拥有更高的可拓展性，在后续具备迭代和优化的空间。</p>
+<p>根据核心需求和问题域的答案，梳理出业务流程。</p>
+<p>业务架构就是在业务需求初期，将模糊的需求描述转变成清晰的问题域，梳理出清晰的业务流程。为产品架构提供输入。<br>
+业务架构包括业务规划、业务模块、业务流程，对整个系统的业务进行拆分，对领域模型进行设计，把现实的业务转化成抽象对象。</p>
+<h3>数据架构</h3>
+<p>数据架构主要解决三个问题：第一，系统需要什么样的数据；第二，如何存储这些数据；第三，如何进行数据架构设计。</p>
+<h4>系统需要什么样的数据</h4>
+<p>业务运营过程中有两条重要的线索：<strong>流程</strong>和<strong>数据</strong>。业务流程离不开数据流转，业务运营状况通过数据反映。基于业务架构的端到端的流程建模过程中，会衍生出对应的业务数据对象，需要与数据架构模型对接。<strong>流程模型和数据模型对接后落实到应用层面，就形成了产品架构。</strong></p>
+<p>数据架构中的数据包含静态数据和动态数据。<strong>相对静态部分如元数据</strong>、业务对象数据模型、主数据、共享数据。<strong>相对动态部分如数据流转</strong>、ETL、数据全生命周期管控治理。</p>
+<h4>如何存储这些数据</h4>
+<p>一种是集中式存储，一种是分布式存储。</p>
+<h4>如何进行数据架构设计</h4>
+<p>数据模型最常用的视图就是 ER 图，它主要描述企业数据实体、属性和关系。</p>
+<ul>
+<li>实体 (Entiy): 企业领域对象</li>
+<li>属性 (Attribute): 领域对象的属性</li>
+<li>联系 (RelationShip): 两个领域对象之间的关系 (1:1, 1:n 或者 m:n)</li>
+</ul>
+<h3>产品架构</h3>
+<p>基础的产品框架脱胎于业务流程，但相比业务流程，更加注重产品功能的枚举、功能模块之间的分界。<br>
+产品架构中，功能模块是根据其相互之间的关系来组织的。一个产品中不同的功能模块之间的关系分直接关系和间接关系。只有直接关系的功能模块才会被组织到一起，形成一个子系统。那些存在间接关系的模块，会在不同的层级通过直接关系的模块产生联系。</p>
+<p>当具有直接关系的功能模块组合成一个子系统后，解决相同问题域的子系统就形成一个功能层级。功能层级按照接近用户实操的距离程度进行从上到下，或者从左至右的划分，这就形成了产品架构的分层。</p>
+<h3>应用架构</h3>
+<p>应用架构是要说明产品架构分哪些应用系统，应用系统间是如何集成的。这就是应用架构和应用集成架构。产品架构在业务架构的基础上，按照解决的业务问题域，划分出不同的功能模块，再根据功能模块间的关系，组合成子系统。应用架构在产品架构的基础上考虑两个事情：第一、考虑的是子系统间的关系。第二、考虑将可复用的组件或模块进行下沉，沉淀到平台层，为业务组件提供统一的支撑。</p>
+<p>应用架构在规划时，需要遵循以下几个原则：</p>
+<ul>
+<li>简单性：体现在应用架构是否有清晰、明确的层次划分，各应用系统之间的连接关系是否简单明确，系统之间的耦合程度低。</li>
+<li>灵活性：体现在应用架构适应业务的快速变化，不仅要求在快速增加新应用时保持现有应用架构的稳定性，还要在适应业务变化的同时主动促进业务变革。</li>
+<li>整合性：通过应用系统之间的解耦和组合，以统一的方式对外提供一致的服务接口，从而实现应用系统之间的共享和协作。</li>
+</ul>
+<h3>技术架构</h3>
+<p><strong>技术架构是应接应用架构的技术需求，并根据识别的技术需求</strong>，进行技术选型，把各个关键技术和技术之间的关系描述清楚。</p>
+<p>技术架构解决的问题包括：如何进行纯技术层面的分层、开发框架的选择、开发语言的选择、涉及非功能性需求的技术选择。由于应用架构体系是分层的，那么对于的技术架构体系自然也是分层的。大的分层有微服务架构分层模型，小的分层则是单个应用的技术分层框架。大的技术体系考虑清楚后，剩下的问题就是根据实际业务场景来选择具体的技术点。各个技术点的分析、方案选择，最终形成关键技术清单，关键技术清单考虑应用架构本身的分层逻辑，最终形成一个完成的技术架构图。</p>
+<p>总之，<strong>技术架构是将产品需求转变为技术实现的过程</strong>。</p>
+<h2>为什么要画架构图</h2>
+<h3>梳理自己对产品和技术方向的判断</h3>
+<p>我们是不是都会遇到这样的情况，每次画图前，脑海中有一张看似清晰的图。<strong>但是一到画图那一刻，这张图确又是那么无比的模糊。思考这张图如何设计的过程，也是帮助你梳理“未来产品该朝什么方向发展、功能迭代如何分期和落地、和其他产品的依赖关系是什么、技术方案该如何演进”等问题的过程</strong>。</p>
+<h3>提供产品 &amp; 技术 &amp; 运营的输出</h3>
+<p>当产品架构图被设计出来后，按照产品架构图的结构和路径，项目的里程碑（RoadMap）就可以被清晰的<strong>拆解</strong>出来，同时项目成员也可以根据这张架构图产出运营计划、技术架构等强依赖产品方向的方案。</p>
+<p>当技术架构图被设计出来后，技术方案、技术开发进度就可以被清晰的制定，技术选型就会明确的选定。</p>
+<h3>让他人可视化的理解你的架构</h3>
+<p>能清晰简单的呈现自己的思路、明确自己产品的边界和技术边界、指明发展的方向，帮助不了解你产品的人快速的建立对你产品结构、功能、技术的认知。</p>
+<h3>提供面向不同人员的视图语言</h3>
+<p>不同角色对于架构视图的需求有所不同，一张图走天下是不太现实。往往需要针对不同的用户，提供不同视角的架构视图，便于不同角色用户对于产品的理解。</p>
+<p>来看一个生活中视图的例子。就拿中国地图为例，不同的人员会关心不同的问题，例如图 1（中国气候类型）是气象学家关心的，而图 2（商品粮基地分布）是粮食局人员关心的。如果气象学家拿到一张商品粮基地分布地图，对他们来说根本就没有什么研究价值。看地图的人希望一幅地图能针对他的需求来展现。</p>
+<p>同理，软件架构视图也需要按照不同的视角提供不同的视图。面向业务或者产品，需要以产品架构图去展示。面向技术同学，需要以技术架构图去沟通。不同的视图有助于大家理解同一件事。</p>
+<h2>何时需要画架构图</h2>
+<h3>在复杂项目开始前画</h3>
+<p>当你要开始设计一个系统性、完整性的系统时，如果一开始就跳过设计产品架构图、技术架构图，直接开始写文档、画 demo，就很容易发生改了又改，做了又推翻的情况。</p>
+<h3>当你觉得是该画的时候（do it）</h3>
+<p>如果项目已经进行了一半，或者项目都已经结束了，但自己却从未画过架构图。那么从此刻开始，动手开始画把。有一句话“种一棵树最好的时间是十年前，其次是现在”。</p>
+<p>如何画架构图对复杂的系统，特别是前人没有做过的新系统，通常难以一下子设计出合适的架构。在架构设计的初期，通常都要经历一个不断探索的阶段。</p>
+<p>在架构设计过程中，架构分解是必不可少的关键步骤。如何进行架构分解，从哪里入手开始进行分解？这些需要一套架构分解的过程模型和过程方法来指导分解。</p>
+<p>从架构域的分类：业务架构、数据架构、产品架构、应用架构、技术架构这 5 个域，依次需要进行架构分解。每个结构域的分解过程，都是一个迭代过程。从无到有、从粗到细、从模糊到清晰，一步步精细化、丰富架构。迭代的过程就是一个否定之否定的过程，随着分解的逐步推进或系统的架构演化，后面的分解除了会识别出新的架构元素，也可能会对先前识别出的架构作出调整。整个架构分解的迭代过程，通过画架构图的方式是种非常直观的表现形式。</p>
+<p><img alt="图示" src="https://mmbiz.qpic.cn/mmbiz_png/YriaiaJPb26VMnEoyQl6t94PhqNsjsMuBuib4rZsVcibwAMAZ4Oq8j7qtrMlibrCdTkrBf4fC0cmgEicibLaq5wpU2eTg/640?wx_fmt=png">  </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
+    <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
+    <li class="list-group-item"><a href="/pages/20190120.html">Python__slots__详解</a></li>
+    <li class="list-group-item"><a href="/pages/20170729.html">《控制论与科学方法论》 第一章</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2019 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>

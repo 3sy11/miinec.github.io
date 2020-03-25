@@ -11,19 +11,19 @@
 
 <link rel="canonical" href="/pages/20190120.html">
 
-        <meta name="author" content="Miinec" />
+        <meta name="author" content="Mii" />
         <meta name="keywords" content="Python" />
-        <meta name="description" content="Slots的实现 class Member(object): # 定义描述器实现slots属性的查找 def __init__(self, i): self.i = i def __get__(self, obj, type=None): return obj._slotvalues[self.i] def __set__(self, obj, value): obj._slotvalues[self.i] = value class Type(type): # 使用元类实现slots def __new__(self, name, bases, namespace): slots = namespace.get(&#39;_slots_&#39;) if slots: for …" />
+        <meta name="description" content="__slots__的一些特性" />
 
         <meta property="og:site_name" content="米de世界" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Python__slots__详解"/>
         <meta property="og:url" content="/pages/20190120.html"/>
-        <meta property="og:description" content="Slots的实现 class Member(object): # 定义描述器实现slots属性的查找 def __init__(self, i): self.i = i def __get__(self, obj, type=None): return obj._slotvalues[self.i] def __set__(self, obj, value): obj._slotvalues[self.i] = value class Type(type): # 使用元类实现slots def __new__(self, name, bases, namespace): slots = namespace.get(&#39;_slots_&#39;) if slots: for …"/>
+        <meta property="og:description" content="__slots__的一些特性"/>
         <meta property="article:published_time" content="2019-01-20" />
             <meta property="article:section" content="技能树" />
             <meta property="article:tag" content="Python" />
-            <meta property="article:author" content="Miinec" />
+            <meta property="article:author" content="Mii" />
 
 
 
@@ -53,8 +53,14 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
                         <li class="active">
                             <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+                        <li >
+                            <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -101,7 +107,7 @@
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h2>Slots的实现</h2>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="c1"># 定义描述器实现slots属性的查找</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span>
@@ -138,7 +144,7 @@
 <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
 <span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <blockquote>
@@ -174,13 +180,13 @@
 </ul>
 <p>为了正确使用__slots__，最好直接继承object。如有需要用到其他父类，则父类和子类都要定义slots，还要记得子类的slots会覆盖父类的slots。除非所有父类的slots都为空，否则不要使用多继承。</p>
 <h3>添加__dict__获取动态特性</h3>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="vm">__dict__</span>
 <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>添加__weakref__获取弱引用功能</h3>
@@ -189,14 +195,14 @@
 <p>定义了__slots__后，这个类的类属性都变为了描述器。如果给类属性赋值，就会把描述器给覆盖了。</p>
 <h3>namedtuple</h3>
 <p>利用内置的namedtuple不可变的特性，结合slots，能创建出一个轻量不可变的实例。(约等于一个元组的大小)</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">class</span> <span class="nc">MyNt</span><span class="p">(</span><span class="n">namedtupele</span><span class="p">(</span><span class="s1">&#39;MyNt&#39;</span><span class="p">,</span> <span class="s1">&#39;bar baz&#39;</span><span class="p">)):</span> <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">MyNt</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span><span class="o">.</span><span class="n">bar</span>
 <span class="s1">&#39;r&#39;</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">nt</span><span class="o">.</span><span class="n">baz</span>
 <span class="s1">&#39;z&#39;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>当一个类需要创建大量实例时，可以使用__slots__来减少内存消耗。如果对访问属性的速度有要求，也可以酌情使用。另外可以利用slots的特性来限制实例的属性。而用在普通类身上时，使用__slots__后会丧失动态添加属性和弱引用的功能，进而引起其他错误，所以在一般情况下不要使用它。</p>
@@ -225,8 +231,10 @@
 <li class="list-group-item">
   <h4>Recent Posts</h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
     <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
     <li class="list-group-item"><a href="/pages/20190120.html">Python__slots__详解</a></li>
+    <li class="list-group-item"><a href="/pages/20170729.html">《控制论与科学方法论》 第一章</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -236,7 +244,13 @@
   <h4>Categories</h4>
   <ul class="list-group" id="categories">
     <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
       <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
     </li>
   </ul>
 </li>
@@ -247,13 +261,37 @@
   <a href="/"><h4>Tags</h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
     <li class="list-group-item tag-4">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
     </li>
   </ul>
 </li>
