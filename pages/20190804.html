@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>python黑科技 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190804.html">
+
+        <meta name="author" content="Mii" />
+        <meta name="keywords" content="python" />
+        <meta name="description" content="主要搜集了一些，零散的python使用技巧，持续更新" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="python黑科技"/>
+        <meta property="og:url" content="/pages/20190804.html"/>
+        <meta property="og:description" content="主要搜集了一些，零散的python使用技巧，持续更新"/>
+        <meta property="article:published_time" content="2019-08-04" />
+            <meta property="article:section" content="技能树" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="Mii" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+                        <li >
+                            <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190804.html"
+                       rel="bookmark"
+                       title="Permalink to python黑科技">
+                        python黑科技
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-08-04T00:00:00+08:00"> 周日 04 八月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2>动态绑定解释器的excepthook</h2>
+<p>定义以下类</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExceptionHook</span> <span class="p">:</span>
+    <span class="n">instance</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">IPython.core</span> <span class="kn">import</span> <span class="n">ultratb</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="n">ultratb</span><span class="o">.</span><span class="n">FormattedTB</span><span class="p">(</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;Plain&quot;</span><span class="p">,</span> <span class="n">color_scheme</span> <span class="o">=</span> <span class="s2">&quot;Linux&quot;</span><span class="p">,</span> <span class="n">call_pdb</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>使用的时候导入</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exceptionhook</span> <span class="o">=</span> <span class="n">ExceptionHook</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>重设完exceptionhook后，一旦你的代码抛出异常，整个解释器的环境都会被ipdb接管，然后就可以像交互模式下那样使用了。通常我会在里面查一下栈，把必要的对象pickle一下，这样以后复现错误也比较容易。</p>
+<h2>MethodType</h2>
+<p>需要绑定的类或实例.需要被绑定的方法=MethodType(方法名,类名/属性名)</p>
+<h3>1. 绑定方法到实例中</h3>
+<div class="highlight"><pre><span></span><code><span class="n">form</span> <span class="n">types</span> <span class="kn">import</span> <span class="nn">MethodType</span>
+<span class="k">class</span> <span class="nc">Student</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="c1">#先建立一个类</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">set_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">age</span><span class="p">):</span> <span class="c1">#一个即将被绑定的方法</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="o">=</span><span class="n">age</span>
+<span class="n">s</span><span class="o">=</span><span class="n">Student</span><span class="p">()</span> <span class="c1">#创建一个实例</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="n">MethodType</span><span class="p">(</span><span class="n">set_age</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="c1">#动态绑定方法：set_age到s</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="mi">22</span> <span class="c1">#使用动态绑定的方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">set_age</span><span class="p">)</span> <span class="c1">#输出22</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="n">MethodType</span><span class="p">(</span><span class="n">set_age</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set_age</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="c1">#输出23</span>
+</code></pre></div>
+
+
+<h3>2. 绑定到类上</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Student</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>              <span class="c1">#先建立一个类</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">set_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>               <span class="c1">#一个即将被绑定的方法</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="o">=</span><span class="n">age</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
+<span class="n">Student</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="n">MethodType</span><span class="p">(</span><span class="n">set_age</span><span class="p">,</span><span class="n">Student</span><span class="p">)</span>
+<span class="n">Student</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="mi">22</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">set_age</span><span class="p">)</span>                   <span class="c1">#输出22</span>
+<span class="n">Student</span><span class="o">.</span><span class="n">set_age</span><span class="o">=</span><span class="n">MethodType</span><span class="p">(</span><span class="n">set_age</span><span class="p">,</span><span class="n">Student</span><span class="p">)</span>
+<span class="n">Student</span><span class="o">.</span><span class="n">set_age</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>                      <span class="c1">#输出23</span>
+<span class="n">s1</span><span class="o">=</span><span class="n">Student</span><span class="p">()</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">age</span>                                  <span class="c1">#输出23</span>
+</code></pre></div>
+
+
+<p>绑定到类上和绑定到实例上有个很大的区别，前者所有的用类生成的实例的属性值相同，因为绑定生成的属性是类属性，后者这是对每个实例生成一个属性。</p>
+<h2>写C/java/C++一样用大括号而不用缩进</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">braces</span>
+</code></pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20200112.html">redis 命令参考</a></li>
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
+    <li class="list-group-item"><a href="/pages/20190804.html">python黑科技</a></li>
+    <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
+    <li class="list-group-item"><a href="/pages/20190120.html">Python__slots__详解</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-4">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/python.html">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/redis.html">redis</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zhong-jian-jian.html">中间件</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
