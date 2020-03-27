@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>docker - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190212.html">
+
+        <meta name="author" content="Mii" />
+        <meta name="keywords" content="docker" />
+        <meta name="description" content="docker入门教程和生产使用" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="docker"/>
+        <meta property="og:url" content="/pages/20190212.html"/>
+        <meta property="og:description" content="docker入门教程和生产使用"/>
+        <meta property="article:published_time" content="2019-02-12" />
+            <meta property="article:section" content="技能树" />
+            <meta property="article:tag" content="docker" />
+            <meta property="article:author" content="Mii" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/ji-neng-shu.html">技能树</a>
+                        </li>
+                        <li >
+                            <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190212.html"
+                       rel="bookmark"
+                       title="Permalink to docker">
+                        docker
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-02-12T00:00:00+08:00"> 周二 12 二月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/docker.html">docker</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h1>docker</h1>
+<p><a href="https://www.bilibili.com/video/av23053656">【Docker】最新docker构建微服务框架 零基础入门</a></p>
+<h2>进入容器查看配置</h2>
+<div class="highlight"><pre><span></span><code>pi@raspbian:~$ sudo docker run -i -t seblucas/alpine-python3 /bin/sh
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+    7 root      0:00 ps
+/ # ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02  
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:40 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:5504 (5.3 KiB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+</code></pre></div>
+
+
+<h2>docker的基本组成</h2>
+<p><img alt="1.png" src="https://upload-images.jianshu.io/upload_images/18785907-cd0d18528e8fc3b3.png"></p>
+<p><img alt="2.png" src="https://upload-images.jianshu.io/upload_images/18785907-15a8f0ebd26ed9ea.png"></p>
+<p><img alt="3.png" src="https://upload-images.jianshu.io/upload_images/18785907-72ae463d4aeda9b5.png"></p>
+<p><img alt="4.png" src="https://upload-images.jianshu.io/upload_images/18785907-20c881e30e76d2f0.png"></p>
+<p>docker容器内安装程序  </p>
+<div class="highlight"><pre><span></span><code>docker run learn/tutorial apt-get install -y ping  
+docker run python3 pip install NetEase-MusicBox  
+<span class="c1">#要容器支持的命令才可以，具体怎么支持，暂时不清楚  </span>
+<span class="c1">#以上命令是在可写层完成，完成后就可以提交  </span>
+docker ps -l  
+docker commit ID  
+docker inspect ID <span class="c1"># 查看运行中的容器，返回一些列JSON格式的容器状态信息</span>
+</code></pre></div>
+
+
+<h2>docker依赖的Linux内核特性</h2>
+<p>namespaces 命名空间
+control group 控制组  /sys/?/cgroup/*
+chroot 文件系统隔离</p>
+<p>目的：<br>
+代码语言的封装，是代码隔离<br>
+操作系统资源隔离，进程，网络，文件系统等</p>
+<p>分为以下几种隔离</p>
+<p><img alt="5.png" src="https://upload-images.jianshu.io/upload_images/18785907-7ac7db39c68d9acf.png"></p>
+<p><img alt="21.png" src="https://upload-images.jianshu.io/upload_images/18785907-dc794709f0ab959f.png"></p>
+<p><img alt="22.png" src="https://upload-images.jianshu.io/upload_images/18785907-1c84f9c3780694aa.png"></p>
+<p>使用了control group控制组来实现隔离，其中包括资源限制，优先级设定，资源计量，资源控制。<br>
+最终实现了，文件系统隔离：每个容器都有自己的root文件系统，进程隔离：每个容器都在自己的进程中，网络隔离：每个容器间的新网络接口和IP地址都是分开的，资源隔离和分组，使用cgroup将CPU,内存之类资源独立分配给每个容器。</p>
+<h2>docker安装</h2>
+<p>使用非root用户</p>
+<div class="highlight"><pre><span></span><code>sudo groupadd docker
+sudo gpasswd -a <span class="si">${</span><span class="nv">USER</span><span class="si">}</span> docker <span class="c1"># $变量替换为当前用户名</span>
+sudo service docker restart
+</code></pre></div>
+
+
+<h2>基本操作</h2>
+<div class="highlight"><pre><span></span><code>docker run learn/tutorial apt-get install -y ping
+<span class="c1">#run单次执行命令  </span>
+dorcer run -i -t IMAGE /bin/bash
+<span class="c1">#tty终端，始终代开交互i</span>
+docker ps -a -l
+
+docker inspect container
+<span class="c1"># 查看状态</span>
+
+docker run --name<span class="o">=</span>namename
+<span class="c1"># 定义容器名字</span>
+
+docker start -i
+<span class="c1"># i是交互的方式启动</span>
+
+docker rm container名称
+</code></pre></div>
+
+
+<h2>守护式容易</h2>
+<p>交互式容器
+<code>docker run -i -t imgae /bin/bash</code><br>
+ctrl+p ctrl+q<br>
+退出后就会成为以后后台运行的容器  </p>
+<p><code>docker attach 容器名</code><br>
+重新进入容器</p>
+<p><code>docker run --name 名称 -d 镜像名</code><br>
+使用后台守护容器  </p>
+<p><code>docker logs -f -t 容器名</code><br>
+<code>docker logs --tail 容器名</code><br>
+两个命令一样，查看容器内部执行情况<br>
+后面一个只显示最新的</p>
+<p>查看容器内的进程<br>
+<code>docker top 容器名</code></p>
+<p>在已经运行的docker容器中启动新的进程<br>
+<code>docker exec -d -i -t 容器名 命令 参数</code></p>
+<p>停止容器<br>
+<code>docker stop 容器名</code><br>
+<code>docker kill 容器名</code><br>
+上面是发送信号等待停止，后面是直接停止。</p>
+<h2>docker中部署静态网站</h2>
+<p>设置容器的端口映射<code>run -P容器所有暴露的端口进行映射 -p指定</code>，四种格式</p>
+<ul>
+<li>containerport -p 80 将容器的80随机映射到宿主机的端口</li>
+<li>hostpost:containerport -p 8080:80 将容器的80端口映射到宿主机的8080</li>
+<li>ip::contianerport -p 0.0.0.0:80</li>
+<li>ip:hostport:contianerport 0.0.0.0:8080:80</li>
+</ul>
+<div class="highlight"><pre><span></span><code>docker run -i -t 镜像 /bin/bash
+apt-get install nginx -y
+apt-get install vim -y
+mkdir -p /var/www/html
+<span class="nb">cd</span> /ver/www/html
+vim index.html
+whereis nginx
+<span class="nb">cd</span> /etc/gninx/state-enabled
+vim default
+nginx
+ps -ef
+
+ctrl+p,ctrl+q
+
+docker ps
+docker port web
+curl localhost:80
+
+docker inspect 容器名  <span class="c1"># 找到容器的外部地址，可以外部访问</span>
+docker stop 容器
+docker start -i 容器名 <span class="c1"># 此时nignx不再重新启动</span>
+
+docker <span class="nb">exec</span> 容器名 nginx
+docker top 容器名 <span class="c1">#此时启动起来了，但是IP地址会有所不一样，需要调整</span>
+</code></pre></div>
+
+
+<h2>镜像与仓库</h2>
+<p>/var/lib/docker 镜像存储这里的<br>
+docker images -a -f过滤 -q只显示镜像唯一ID --no-trunc不适用截断  </p>
+<p>repository 仓库是一系列关联的镜像的集合<br>
+registry 提供docker 镜像的存储服务，包含多个repositpry<br>
+tag 仓库名rep:tag就是一个镜像，默认使用latest</p>
+<p>docker images -a 显示的所有镜像中，没有名字核标签的是中间层镜像。<br>
+docker inspect 查看详细信息<br>
+docker rmi -f 强制
+docker rmi $(docker images -q rep仓库名) 这样可以批量删除</p>
+<h2>获取推送镜像</h2>
+<p>docker search --automated --no-trunc -s显示最低星级<br>
+docker pull</p>
+<p>修改镜像源，需要再服务启动的添加参数
+修改/etc/default/docker添加DOCKER_OPTS="--registry-mirror=add"  </p>
+<blockquote>
+<p>daocloud有加速器</p>
+</blockquote>
+<h2>构建镜像</h2>
+<p>docker commit -a作者 -m信息 -p不暂定构建</p>
+<p>docker build -t指定名字 .当前目录<br>
+会顺序执行，每一步建立一个中间层</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 注释</span>
+<span class="k">FROM</span><span class="s"> ubuntu:14</span>
+<span class="k">MAINTAINER</span><span class="s"> dormancypree &quot;email@add.com&quot;</span>
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y nginx
+<span class="k">EXPOSE</span><span class="s"> 80</span>
+</code></pre></div>
+
+
+<h2>docker C/S模式</h2>
+<p><img alt="6.png" src="https://upload-images.jianshu.io/upload_images/18785907-6053ee9b674fb293.png"></p>
+<p><img alt="7.png" src="https://upload-images.jianshu.io/upload_images/18785907-12ef453bf1c17190.png"></p>
+<p><img alt="8.png" src="https://upload-images.jianshu.io/upload_images/18785907-be10929fa77f9686.png"></p>
+<div class="highlight"><pre><span></span><code>nc -U /var/run/docker.sock
+GET /info HTTP/1.1
+</code></pre></div>
+
+
+<h2>docker 守护进程的配置和操作</h2>
+<div class="highlight"><pre><span></span><code>sudo service docker start
+sudo service docker stop
+sudo service docker restart
+</code></pre></div>
+
+
+<p>dokcer -d 守护进程 -D debug -e 驱动模式 -g -icc -l 日志 -p pidfile<br>
+启动配置文件/etc/default/docker里可以修改</p>
+<h2>docker的远程访问</h2>
+<p>修改服务端配置文件中docker_dpts，-H tcp://0.0.0.0:2375 就可使用远程访问<br>
+export DOCKER_HOST="",可以不改配置文件实现。</p>
+<h2>dockerfile指令</h2>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="s"> image:tag # 基础镜像，必须是第一条非注释指令</span>
+<span class="k">MAINTAINER</span><span class="s"> # 指定作者信息</span>
+<span class="k">RUN</span> # 有两种模式，一种是shell模式，一种是exec模式
+<span class="k">RUN</span> &lt;command&gt; # shell 模式 以/bin/sh -c command的方式工作
+<span class="k">RUN</span> <span class="o">[</span><span class="s2">&quot;executable&quot;</span>,<span class="s2">&quot;param1&quot;</span>,<span class="s2">&quot;param2&quot;</span><span class="o">]</span> # exec模式 可以使用其他形式的shell，比如 /bin/bash -c echel hello
+<span class="c"># 每一个run指令都是一个镜像分层</span>
+<span class="k">EXPOSE</span><span class="s"> # 指定容器使用的端口，但是依然需要手动指定映射</span>
+<span class="k">CMD</span> # 与RUN类似，也是两种模式，只是当容器运行是才运行，不是构建运行，并且CMD的指定会被交互界面docker执行命令所覆盖。所以CMD只是默认执行方式。
+ENTERYPOINT # CMD类似，只是不会被覆盖，如果需要覆盖，需要dokcerrun的时候用参数指定,同时CMD的值只会被当做参数传递给ETP
+<span class="k">ADD</span> &lt;src&gt; &lt;dest&gt; # 与COPY类似，复制文件，从&lt;src&gt;到&lt;dest&gt;
+<span class="k">COPY</span>  # 区别在ADD有解压缩功能
+<span class="k">VOLUME</span><span class="s">  # 添加卷，用于共享 数据</span>
+<span class="k">WORKDIR</span><span class="s">  # 指定工作目录</span>
+<span class="k">ENV</span> # <span class="nv">这是环境变量k</span><span class="o">=</span>v
+<span class="k">USER</span><span class="s">  # 指定运行的用户</span>
+<span class="k">ONBUILD</span> <span class="c"># 出发器，当时当前镜像被当成基础镜像时触发。</span>
+</code></pre></div>
+
+
+<h2>Dockerfile 构建过程</h2>
+<p>中间层镜像可以用于debug，中间层容器会被缓存，可以使用--no-cacha不使用缓存。docker history 可以查看镜像构建过程。</p>
+<h2>docker容器的网络连接</h2>
+<p>ifconfig中有个docker0的虚拟网桥。提供65534个IP的空间  </p>
+<p><img alt="9.png" src="https://upload-images.jianshu.io/upload_images/18785907-f204261264853bf5.png"></p>
+<p>linux的往前管理工具 bridge-utils。<br>
+自动以虚拟网桥docker0  </p>
+<p>容器间链接，默认情况下--icc 默认是可以连接的。直接使用容器内ifconfig的地址就可以ping得通。会随容器重启会变变，所以使用docker run --link 容器名:别名 IMAGE COMMOND来启动。如果需要管理，可以icc设置为false iptables设置为true，就可以通过iptables来实现粒度更细的连接管理。</p>
+<p>ip_forward的流量转发<br>
+iptables</p>
+<p><img alt="10.png" src="https://upload-images.jianshu.io/upload_images/18785907-4c4a7794b8dae078.png"></p>
+<h2>数据管理</h2>
+<p>数据卷可以绕过联合文件系统（UFS），为一个嚯多个容器提供访问。目的是为了数据的永久化。第一，独立与dokcer的存在，第二可以是目录，也可以是文件，第三，宿主机，容器间数据共享。  </p>
+<p><img alt="11.png" src="https://upload-images.jianshu.io/upload_images/18785907-76fb76d3897de1e8.png"></p>
+<p><img alt="12.png" src="https://upload-images.jianshu.io/upload_images/18785907-fb253098d65229b7.png"></p>
+<p>添加数据卷：<br>
+<code>docker run -v ~/container_data:/data -it ubuntu /bin/bash</code><br>
+添加访问权限,只读：<br>
+<code>docker run -v ~/container_data:/data:ro -it ...</code><br>
+在dokcerfile中的<code>VOLUMES ["/data"]</code> 创建数据卷，是不能映射到本地文件目录中，所以不能共享，在容器启动时创建，创建在容器内？</p>
+<p>数据卷容器，<code>docker run --volumes-from 容器名</code> 创建一个挂载了数据卷容器的容器名，之后运行的容器同构volumes-from链接到数据圈容器。这里大概的意思就是创建了一个容器专门管理数据，其他容器来连接这个数据管理容器获得数据，和宿主机无关。</p>
+<p><img alt="13.png" src="https://upload-images.jianshu.io/upload_images/18785907-81ca2ca699861b86.png"></p>
+<p>使用数据卷容器，可以避免暴露宿主机的真实目录。当数据卷容器被删除，指向的数据卷目录依然可用。根据inspect信息看，使用数据卷容器的容器，在Volumes值是一个map，映射到docker底层的镜像文件路径。<br>
+数据卷容器，本质是传递配置管理信息。</p>
+<p>数据备份和还原<br>
+<code>docker run --volumes-from 容器名 -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar 数据卷容器</code> 运行一个容器，链接到数据卷容器，同时映射到宿主机的backup目录，然后执行压缩命令。用这种方式实现数据的转译  </p>
+<p><img alt="14.png" src="https://upload-images.jianshu.io/upload_images/18785907-3de021ea9b9a3d05.png"></p>
+<p><img alt="15.png" src="https://upload-images.jianshu.io/upload_images/18785907-28d690434401d4ed.png"></p>
+<blockquote>
+<p>这个操作还挺骚的</p>
+</blockquote>
+<h2>跨主机链接</h2>
+<p>一是用网桥，二是用open vSwitch 通常用这个，用隧道实现的点对点链接，三是用weave实现。  </p>
+<p><em>k8s方案，或者overlay+consul方案，第二种方案等我写笔记</em></p>
+<p><img alt="16.png" src="https://upload-images.jianshu.io/upload_images/18785907-68859b9fa0676812.png"></p>
+<p><img alt="17.png" src="https://upload-images.jianshu.io/upload_images/18785907-055468e82b88f75f.png"></p>
+<p><img alt="18.png" src="https://upload-images.jianshu.io/upload_images/18785907-10c091a03311bd94.png"></p>
+<p><img alt="19.png" src="https://upload-images.jianshu.io/upload_images/18785907-fddb430a0e6b8aac.png"></p>
+<p><img alt="20.png" src="https://upload-images.jianshu.io/upload_images/18785907-b92a6c588e037351.png"></p>
+<h2>docker的实现和原理</h2>
+<p><em>视频中的第二个将使，主要内容和原理有关，很重要</em></p>
+<p>LXC是container最早使用的引擎，最新的使用libcontanier替换了lxc</p>
+<p>aufs文件系统来管理image和container。 advanced multi layer unification filesystem高级多层联合系统，允许readonly和rw目录并存。<strong>以下三点很重</strong></p>
+<ul>
+<li>只读的部分为image,可写部分为container。</li>
+<li>image类似一个单链表系统，每个image包含一个纸箱parent image的指针。</li>
+<li>没有parent image的image是base image。</li>
+</ul>
+<p><img alt="23.png" src="https://upload-images.jianshu.io/upload_images/18785907-32df090ce3bffdec.png"></p>
+<p>基于C/S架构的实现，Server使用UnxiSocket,也可以切换到TcpProtocol</p>
+<p>传统linux的文件系统包含两个filesystem</p>
+<ul>
+<li>boot file system:bootfs,包含bootloader和kernal，启动完成后，kernel在内存中，bootfs接触挂载。按下开机键，bootfs先挂载。</li>
+<li>root file system:rootfs,包含/bin,/usr,/lib,等目录，这些是和kernel无关，和不同的linxu分发版本有关。kernel驻在内存后，就开始挂载rootfs，</li>
+</ul>
+<p>因为docker运行在kernel上，可以支持不同的rootfs的发行版本，busybox是一个轻量级的linux版本，树莓派的docker镜像可以基于这个来创建。</p>
+<p><img alt="24.png" src="https://upload-images.jianshu.io/upload_images/18785907-f4b91f9bb54722a3.png"></p>
+<p><img alt="25.png" src="https://upload-images.jianshu.io/upload_images/18785907-3a1e82a4dad41f23.png"></p>
+<p>传统linxu启动，rootfs设置为只读，检查完整性以后，设置为只读。docker在启动容器时，也把rootfs设置为只读，然后通过aufs把一个读写的文件系统挂载到rootfs之上，并且把下层文件系统设置成只读，这样构建一个完整的操作系统。aufs就像是把自己一部分的文件系统merge到原有的rootfs，建成新的文件系统，完成修改，像是monkey path。<br>
+按照图示的讲，当内核加载完成，busybox加载上，<strong>docker会把自己的某种系统挂载到busybox之上，并将busybox（rootfs层）设置为只读（传统的可读写的rootfs）</strong>，所以上述的三点中第一点就是这个意思。</p>
+<p><img alt="26.png" src="https://upload-images.jianshu.io/upload_images/18785907-14469838e3cf0284.png"></p>
+<p>如果上层想修改下层，docker采用了COW的技术，把文件复制到rw层进行改写，实际用看到的是当前container层中的文件，image中的文件不会被影响。</p>
+<p>docker的技术storage diver,其中包括aufs,还有vfs,devicemapper,btrfs,例如数据卷的使用就是devicemapper。</p>
+<p>automated是和git集成了，自动拉过来构建的</p>
+<p>dockerfile 源代码路径build和标准输入流方式build</p>
+<p>orchestration as a service,协调服务。能够把这些不同地方的容器进行组织协调起来。涉及到服务发现之类的。fig,k8s这些的。docker-compose,swarm（zookeep可以支持）</p>
+<h2>更深入的一些理论知识</h2>
+<h3>docker网络模式</h3>
+<p>nat,host,other container,none,overlay,增加参数--net 来配置</p>
+<p>nat，这个就是docker0的方式，if-forward=1,外界无法之间访问容器，端口管理复杂.如果使用-p参数这会在iptable里面进行修改来实现映射。  </p>
+<p><img alt="27.png" src="https://upload-images.jianshu.io/upload_images/18785907-c618b55d2f53fb9c.png"></p>
+<p><img alt="28.png" src="https://upload-images.jianshu.io/upload_images/18785907-4032f28a8c82e142.png"></p>
+<p>host,共享宿主机的网络，一模一样的网络  </p>
+<p><img alt="29.png" src="https://upload-images.jianshu.io/upload_images/18785907-3626bedca99f49e4.png"></p>
+<p><img alt="30.png" src="https://upload-images.jianshu.io/upload_images/18785907-cdc1edcd86e7c61f.png"></p>
+<p>other contanier, 多容器共享一个namespace。如果容器间网络频繁可以使用这个模式</p>
+<p><img alt="31.png" src="https://upload-images.jianshu.io/upload_images/18785907-2e52ea3812e0cc32.png"></p>
+<p><img alt="32.png" src="https://upload-images.jianshu.io/upload_images/18785907-64c3fa70b59e2a3d.png"></p>
+<p>none,无网络配置</p>
+<p>overlay，多主机，实践来看，十分复杂的应用方式</p>
+<p><img alt="33.png" src="https://upload-images.jianshu.io/upload_images/18785907-cc860c91ea0fb02b.png"></p>
+<p><img alt="34.png" src="https://upload-images.jianshu.io/upload_images/18785907-26ec99993b056bf8.png"></p>
+<h3>存储管理</h3>
+<p>docker支持的graphdriver,aufs(ubuntu),btrfs(coreos),devicemapper(redhat,centos),overlayfs(coreos)</p>
+<p>aufs,挂载点在/var/lib/docker/aufs/mnt/$container_id<br>
+讲不通得到目录挂载到同一个虚拟文件系统下，实现了layer概念，米有加入linux内核。</p>
+<p>docker info</p>
+<div class="highlight"><pre><span></span><code>4rbrs@orbrs01:~$ sudo docker info
+[sudo] password for 4rbrs:
+Containers: 6
+ Running: 0
+ Paused: 0
+ Stopped: 6
+Images: 3
+Server Version: 17.03.2-ce
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: 4ab9917febca54791c5f071a9d1f404867857fcc
+runc version: 54296cf40ad8143b62dbcaa1d90e520a2136ddfe
+init version: N/A (expected: 949e6facb77383876aeff8a6944dde66b3089574)
+Security Options:
+ apparmor
+ seccomp
+  Profile: default
+Kernel Version: 4.4.0-117-generic
+Operating System: Ubuntu 16.04.4 LTS
+OSType: linux
+Architecture: x86_64
+CPUs: 2
+Total Memory: 3.859 GiB
+Name: orbrs01
+ID: XITH:6E7K:3OWJ:HMEA:B2LH:OEAF:LNXM:TYYH:LI7V:YYUO:GCVI:Z537
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+</code></pre></div>
+
+
+<p><img alt="35.png" src="https://upload-images.jianshu.io/upload_images/18785907-c69f42206e386f0b.png"></p>
+<p>图示会有挂载目录的信息，会为每个容器创建一个子目录./diff目录下。/greph目录下存着镜像的关系文件，graph,镜像保管者，json镜像信息，layersize镜像大小信息。</p>
+<p>docker-devicemappper，按需分配（100G但是不一定，磁盘就占了100G），写的时候才占空间，使用元信息控制metadata，挂载在/dev/loop，想一个磁盘块一样的使用。<br>
+缺点是data100G,扩容需要重启，另外有时候unmont释放会释放不了，导致必须重启宿主机来释放。</p>
+<p><img alt="36.png" src="https://upload-images.jianshu.io/upload_images/18785907-fa81737e012b2beb.png"></p>
+<p>overlayfs，挂载在/var/lib/docker/overlay/$container_id，和aufs相似。如果大文件修改不同于devicemapper的对部分块实现修改，会非常慢的移动大文件实现。</p>
+<p><img alt="37.png" src="https://upload-images.jianshu.io/upload_images/18785907-31ef3973cf16b243.png"></p>
+<p>volume,数据存储，分离数据用的 -v</p>
+<p>注意，在 不同的文件模式下，镜像是相互隔离的。</p>
+<hr>
+<h2>生产使用记录</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 创建镜像</span>
+docker build -t 4rbrs/utils:1.0 .
+<span class="c1"># 删除所有容器</span>
+docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+<span class="c1"># 停止容器，删除容器，删除none镜像</span>
+docker stop <span class="k">$(</span>docker ps -a <span class="p">|</span> grep <span class="s2">&quot;Exited&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1 }&#39;</span><span class="k">)</span>
+docker rm <span class="k">$(</span>docker ps -a <span class="p">|</span> grep <span class="s2">&quot;Exited&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1 }&#39;</span><span class="k">)</span>
+docker rmi <span class="k">$(</span>docker images <span class="p">|</span> grep <span class="s2">&quot;none&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="k">)</span>
+<span class="c1"># 清空日记</span>
+sudo <span class="nb">echo</span> <span class="p">|</span>sudo tee <span class="k">$(</span>sudo docker inspect --format<span class="o">=</span><span class="s1">&#39;{{.LogPath}}&#39;</span> &lt;container_name_or_id&gt;<span class="k">)</span>
+</code></pre></div>
+
+
+<div class="highlight"><pre><span></span><code><span class="c1"># --add-host 在运行容器是添加host信息</span>
+docker run -it --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
+<span class="c1"># 172.17.0.22     09d03f76bf2c</span>
+<span class="c1"># fe00::0         ip6-localnet</span>
+<span class="c1"># ff00::0         ip6-mcastprefix</span>
+<span class="c1"># ff02::1         ip6-allnodes</span>
+<span class="c1"># ff02::2         ip6-allrouters</span>
+<span class="c1"># 127.0.0.1       localhost</span>
+<span class="c1"># ::1               localhost ip6-localhost ip6-loopback</span>
+<span class="c1"># 86.75.30.9      db-static</span>
+</code></pre></div>
+
+
+<p>参数配置
+<code>/etc/docker/daemon.json</code> max-size=500m，意味着一个容器日志大小上限是500M，max-file=3，意味着一个容器有三个日志，分别是id+.json、id+1.json、id+2.json。</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;registry-mirrors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;http://f613ce8f.m.daocloud.io&quot;</span><span class="p">],</span>
+  <span class="nt">&quot;log-driver&quot;</span><span class="p">:</span><span class="s2">&quot;json-file&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;log-opts&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;max-size&quot;</span><span class="p">:</span><span class="s2">&quot;500m&quot;</span><span class="p">,</span> <span class="nt">&quot;max-file&quot;</span><span class="p">:</span><span class="s2">&quot;3&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20200112.html">redis 命令参考</a></li>
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
+    <li class="list-group-item"><a href="/pages/20190804.html">python黑科技</a></li>
+    <li class="list-group-item"><a href="/pages/20190716.html">今日头条已经没那么重要了</a></li>
+    <li class="list-group-item"><a href="/pages/20190220.html">微服务的12个准则</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/ji-neng-shu.html">技能树</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/wen-zhang-gui-dang.html">文章归档</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-1">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/django.html">django</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/docker.html">docker</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kuang-jia.html">框架</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/nei-rong.html">内容</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/python.html">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/redis.html">redis</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/she-jiao.html">社交</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zhong-jian-jian.html">中间件</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zi-xun.html">资讯</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
