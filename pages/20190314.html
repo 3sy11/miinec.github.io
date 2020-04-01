@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>关于 Yelp 的实时流数据基础设施系列文章 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20190314.html">
+
+        <meta name="author" content="Mii" />
+        <meta name="keywords" content="数据,产品" />
+        <meta name="description" content="涉及内容较为广泛，主要围绕数据应用和数据平台进行的设施建设。" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="关于 Yelp 的实时流数据基础设施系列文章"/>
+        <meta property="og:url" content="/pages/20190314.html"/>
+        <meta property="og:description" content="涉及内容较为广泛，主要围绕数据应用和数据平台进行的设施建设。"/>
+        <meta property="article:published_time" content="2019-03-14" />
+            <meta property="article:section" content="技术文章" />
+            <meta property="article:tag" content="数据" />
+            <meta property="article:tag" content="产品" />
+            <meta property="article:author" content="Mii" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/ji-zhu-wen-zhang.html">技术文章</a>
+                        </li>
+                        <li >
+                            <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
+                        </li>
+                        <li >
+                            <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
+                        </li>
+                        <li >
+                            <a href="/category/shang-ye.html">商业</a>
+                        </li>
+                        <li >
+                            <a href="/category/she-hui-ke-xue.html">社会科学</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20190314.html"
+                       rel="bookmark"
+                       title="Permalink to 关于 Yelp 的实时流数据基础设施系列文章">
+                        关于 Yelp 的实时流数据基础设施系列文章
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-03-14T00:00:00+08:00"> 周四 14 三月 2019</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/shu-ju.html">数据</a>
+        /
+	<a href="/tag/chan-pin.html">产品</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>2019-03-14 <a href="https://infoq.cn/article/2016/12/Yelp-data-pipeline-open-source">原文</a></p>
+<p><img alt="总架构" src="https://static001.infoq.cn/resource/image/97/65/97dd0ec6b8169fd53761c4fbe9e01765.png"></p>
+<ul>
+<li><a href="https://github.com/Yelp/mysql_streamer">MySQL Streamer</a>会不断地查看 MySQL 的 binlog，得到最新的表变更操作。Streamer 负责捕获 MySQL 数据库上的单条数据更改操作，并把它封装成 Kafka 消息，发布到 Kafka 的某个 Topic 中。如果有必要，也会做模式转换。</li>
+<li><a href="https://github.com/Yelp/schematizer">Schematizer</a> 服务会跟踪每一条消息所使用的模式信息。在有新模式出现时，Schematizer 会处理注册消息，并为下游的表生成更改计划。</li>
+<li><a href="https://github.com/Yelp/data_pipeline">Data Pipeline clientlib</a> 为生产和消费 Kafka 消息提供了非常易用的接口。有了 clientlib，就再也不必关心 Kafka 的 Topic 名字、加密或消费者程序的分区情况了。你可以站在表和数据库的角度去考虑问题，不必关心其它细节。</li>
+<li><a href="https://github.com/Yelp/data_pipeline_avro_util">Data Pipeline Avro utility</a> 包提供了读写 Avro 模式的 Python 接口。它也可以为表的主键等模式信息提供枚举类，这一点 Yelp 在实践中发现非常有用。</li>
+<li><a href="https://github.com/Yelp/yelp_kafka">Yelp Kafka</a> 库扩展了 Kafka-python 包，并提供了多重处理消费者组等新功能。这个库可以帮助大家非常高效地与 Kafka 进行交互。这个库也让用户可以判断出 Yelp 内部的 Kafka 跨区域部署情况。</li>
+</ul>
+<h2>第一篇：一天几十亿条消息：Yelp 的实时数据管道</h2>
+<p>SOA的规模化后会存在这么些问题，第一，服务与服务之间的通信连接成指数增加，第二，一致性，第三，API设计不具有一致性</p>
+<h3>消息总线</h3>
+<p><img alt="消息总线架构" src="https://static001.infoq.cn/resource/image/30/49/30aeffb2e86e2715e554ca3c327b9c49.jpg"></p>
+<p>这是一个简单结构的消息总线，可以更为复杂，分线结构，将一个service替换成和以上图片一模一样结构的单元，消息总线和分线相连。</p>
+<p><img alt="配置中心消息总线架构" src="http://blog.didispace.com/assets/5-7.png"></p>
+<p>这是一个在配置管理应用中的消息总线架构。同样可以设计出docker版的架构，~~需要补个图，一个任务总线一个运维总线，docker-compose+traefik接口来实现~~</p>
+<h3>解耦数据格式</h3>
+<div class="highlight"><pre><span></span><code>JSON不是一个好的消息格式。开发者可以在任何时候随意改变内容、类型或者 JSON 数据的布局等，但在分布式应用中很难评估数据改变造成的影响。更不幸的是，JSON 的数据改变一般都是先被当成产品错误发现的，因此会导致紧急修复或者回滚，以及相应的后续问题。
+</code></pre></div>
+
+
+<p><strong>我们的核心数据处理模块会产生中间状态的输出，然后被后续的各层、各个分支消费、再处理或再改造</strong>。<br>
+上游的数据问题会在下游许多模块引发各种问题，甚至进一步引发上游的新问题，尤其是在错误不能被尽早捕获的情况下。</p>
+<p><strong>Avro</strong> 最重要的特性是它支持<strong>模式演进</strong>，这意味着在版本兼容的前提下，写程序和读程序可以用不同版本的模式来各自生产和消费数据。<br>
+这就非常完美地把生产者和消费者解耦开了，生产者可以按需要迭代演进数据的模式，而不需要消费者亦步亦趋地跟着改变。</p>
+<p><em>avro，是一种rpc框架，现在还常用的有google的Protocol buffer，apache组件thrift。性能，pb是最快的。但是三种适用的环境有很大不同。</em></p>
+<div class="highlight"><pre><span></span><code>我们构建了一个名为 Schematizer 的 HTTP 模式存储，用于存储 Yelp 数据管道中用到的所有模式，这样我们就可以在发送数据时不必携带模式信息了。事实上，所有用 Avro 编码的数据报文都已经用有模式定义的消息头封装起来了，消息头包括消息 UUID、加密细节、时间戳、报文编码所使用的模式编号等。这样程序就可以动态地在解码时再获取模式。
+</code></pre></div>
+
+
+<p><em>找个了中心统一管理所有的模式，在数据传输的时候不传输模式，当某个服务需要解码时，再去中心获取模式进行解码。</em></p>
+<h3>概要体系结构</h3>
+<p>把数据传输和编码都标准化了之后，我们就不必再关心数据本身，从而可以构建通用程序了。</p>
+<h3>实时数据管道</h3>
+<p>通信协议</p>
+<p>Schematizer 服务处理过。Schematizer 服务负责注册和验证模式，Kafka Topic 和模式之间关联起来。</p>
+<p>格式保障
+<img alt="格式保障，模式管理" src="https://static001.infoq.cn/resource/image/55/a0/55e3f6fb054935b48c2cd455a3c298a0.jpg"></p>
+<div class="highlight"><pre><span></span><code>所有发布出来的消息都一定是符合某种模式定义的，而所有模式也一定是注册到了模式仓库中的。数据管道的生产者和消费者都根据模式来处理数据，Topic 反而被抽象化了。模式注册是幂等的，注册完了的模式都是不可改变的。  
+消费者在第一次碰到某种根据未知模式定义的数据时，需要并且只需要一次获取模式定义的操作，然后再根据模式定义去解码数据就可以了。
+</code></pre></div>
+
+
+<p>兼容性有保障
+<img alt="兼容性有保障，模式管理" src="https://static001.infoq.cn/resource/image/55/a0/55e3f6fb054935b48c2cd455a3c298a0.jpg"></p>
+<p>指定到一个 Topic 的任意有效的模式都必须保证它与这个 Topic 上的任意其他有效的模式是兼容的。<br>
+当 Topic 中出现了按某种没见过的模式编码的消息时，运行中的应用程序会去动态地获取模式定义。生产者可以自己改变它生产的数据的格式，不必要求任何下游消费者跟着改变。消费者会自动的获取新生产者写入消息的模式，同时仍会用手上的模式去解析已知数据。生产者和消费者的数据演进是解耦的。</p>
+<p>注册有保障</p>
+<div class="highlight"><pre><span></span><code>数据生产者和消费者在生产或消费数据时都必须注册。这样我们就知道是公司内的哪些团队和程序在生产和消费数据，用着哪些模式，频率怎么样，等等。
+
+生产者借此与它们的消费者协调一些重大的数据改变，可以在数据出错的时候做自动预警。如果必须要做不兼容的模式升级，生产者也因此可以提前与消费者进行协调。注册机制还让我们有了将过期的模式下线和废弃的方法。我们可以检测到什么时候某些模式已经不再被任何生产者使用了，可以协调消费者将它们使用的模式换成较新版的。注册机制简化了兼容性问题，因为我们可以人为地限制一个 Topic 中有效的模式数量，这样模式的兼容性问题就简化成了只需要与某几个现有模式兼容。
+</code></pre></div>
+
+
+<p>文档与数据属主有保障</p>
+<div class="highlight"><pre><span></span><code>Schematizer要求必须有文档解释每个模式中的每个字段，并且每个模式都必须要有团队来作为数据的属主。不能完整地提供这些信息的模式都通不过验证。文档和属主权信息会通过名为Watson的网站接口展示出来，在上面可以用和Wiki类似的方法添加文档和注释。
+</code></pre></div>
+
+
+<h2>第二篇：Yelp 的实时流技术之二：将 MySQL 表数据变更实时流到 Kafka 中</h2>
+<p>构建一个名为 MySQLStreamer 的系统，来监控数据库中的数据变更，并将数据变更发送给所有订阅了这些内容的服务。</p>
+<p>MySQLStreamer 是一个数据库变更捕获和发布系统，它负责捕获数据库的每一条数据变更，将它们打包成消息并发布到 Kafka 中。“流表二象性”的概念就是讲述可以重放表中的每一条变更操作来将整张表重建为某个时间点的镜像，或者发送表中的每一条变更来重新生成流。</p>
+<h3>数据复制的原理</h3>
+<p><img alt="复制原理" src="https://static001.infoq.cn/resource/image/42/3e/42ee893e719dcbf4c2b6f203e85fd53e.jpg"></p>
+<p>Yelp 的 MySQLStreamer 就做为一个从库，把更新操作持久化到Apache Kafka中，而不是象普通的 MySQL 从库一样持久化到数据表中。</p>
+<h3>MySQL 数据复制原理</h3>
+<p>MySQL 数据库有两种复制类型：</p>
+<ul>
+<li>基于语句的复制（Statement-based replication，SBR），主库写到二进制日志文件中的是 SQL 语句，从库的 SQL 线程则直接在从库上重新执行这些语句。使用基于语句的复制有一些缺点，其中最重要的是有可能导致主从库之间的数据不一致。</li>
+<li>基于行的复制（Row-based replication，RBR）</li>
+</ul>
+<p>两类SQL变更事件：</p>
+<p>-数据定义语言（Data Definition Language，DDL ）：定义或者修改数据库结构或模式；
+-数据操作语言（Data Manipulation Language，DML ）：修改数据行；</p>
+<p>MySQLStreamer 则负责：</p>
+<ul>
+<li>不断从 MySQL 二进制文件中查看最新的日志，读取这两种类型的事件；</li>
+<li>根据事件类型不同而进行相应处理，将 DML 事件发布到 Kafka Topic 中；</li>
+</ul>
+<p>ySQLStreamer 会发布四种不同的事件类型：插入、更新、删除和刷新。前三种对应着相同类型的 DML 操作。刷新事件由我们的初始化 Topic 过程产生，在后文中会详细描述。<br>
+对于每种事件类型，我们都会包含完整的数据行内容。<strong>更新事件包括相应数据行的更新前和更新后的全部字段值</strong>。这对处理环形操作非常重要。</p>
+<h3>数据库拓扑</h3>
+<p>MySQLStreamer 由以下三种数据库组成:</p>
+<p><img alt="MySQLStreamer数据库组成" src="https://static001.infoq.cn/resource/image/5b/82/5b61eb594e32a9a0077755e3f1269d82.jpg"></p>
+<h4>源数据库</h4>
+<p><strong>源数据库中存储上游数据的所有变更事件。MySQLStreamer 会不断查看它的变更状态，把变更事件以流的形式传送给下游的消费者。</strong>MySQLStreamer 的二进制日志流解析模块就负责解析二进制日志，找出新事件。我们的流解析模块是个对python-mysql-replication包的BinLogStreamReader 的进一步抽象，这个 API 主要提供了三个功能：跟踪下一个事件、读取下一个事件、从流的指定位置开始重新读取事件。</p>
+<h4>模式跟踪数据库</h4>
+<p><strong>模式跟踪数据库和只有模式没有数据的从库差不多。它最初是只由源库中的模式生成，然后不断的在上面执行源库中的 DDL 操作来保持更新。这意味着它会略过数据更改，只保存所有表的表结构。</strong>我们通过 Schematizer 服务来在需要时从这个数据库中获取 CREATE TABLE 语句，并生成 Avro 模式。模式信息对于把二进制文件中的字段名与值映射起来也是非常必要的。由于存在复制延迟，MySQLStreamer 当前处理的复制数据的位置所对应的数据库模式也不一定是与主库的最新状态完全一致的。因此，MySQLStreamer 使用的模式定义不能简单地从主库上获取。我们决定用一个数据库来存储这个信息，来避免重新实现 MySQL 的 DDL 引擎。</p>
+<p>由于 DDL 操作是非事务型的，因此假如系统执行一条 SQL 语句失败之后，数据库可能就处于崩溃的状态。为防止这样的事情发生，我们用事务的方式来处理整个数据库。我们在执行任何 DDL 操作之前先<strong>生成检查点</strong>，<strong>把整个模式跟踪数据库的全部模式创建语句都导出来，并保存在状态数据库中</strong>。然后再执行 DDL 事件。如果成功，就把刚才保存的模式导出文件删掉，再生成一个检查点。<strong>一个检查点通常包括保存的二进制文件名和位置，以及相关的 Kafka 偏移量信息。</strong>如果失败了，在 MySQLStreamer 重启之后，它会检查是否存在模式导出文件。如果有，就执行出错的 DDL 事件之前的模式导出文件来重建整个模式跟踪数据库。一旦回放完毕，MySQLStreamer 就重启日志事件查看服务，从检查点位置开始恢复数据复制，从而最终追上主库，保持数据最新。</p>
+<h4>状态数据库</h4>
+<p>状态数据库保存 MySQLStreamer 的内部状态，它包含三张表，分别保存不同的状态信息：</p>
+<h5>DATA_EVENT_CHECKPOINT</h5>
+<p>保存每个 Topic 及相应的最后推送的偏移量信息。</p>
+<h5>GLOBAL_EVENT_STATE</h5>
+<p><img alt="位置信息" src="https://static001.infoq.cn/resource/image/da/4a/da6f023077cd25a2b167de3312925a4a.jpg"></p>
+<p>要保证数据复制在发生故障的情况下仍然是安全的，前提之一就是每个事务都必须有唯一的标识符。它不仅在故障恢复的过程中有用，还在分层复制架构中有用。<strong>全局事务标识符（Global Transaction IDentifier，GTID）就是一个这样的标识符，在一套主从复制环境中，它是在所有服务器中全局唯一的。</strong>我们的代码已经支持 GTID 了，但我们使用的 MySQL 的版本还没支持。所以我们只好寻找其它替代方案来保存这样的状态，要求必须是在整个复制体系中都非常容易解释的，于是我们就想到了 Yelp 现有的心跳守护进程。这个 Python 守护进程会负责周期性地向数据库中更新心跳信息，内容是一个序列号和一个时间戳。这个心跳会随后被复制到所有的从库中。MySQLStreamer 从心跳信息中提取序列号和时间戳，再附上它现在正在处理的日志文件名和日志内偏移量，把这些信息保存在 global_event_state 表中。当主库由于某些原因出故障时， 一个脚本程序会利用心跳序列号和时间戳信息从新的主库中找出日志文件名和偏移量。~~可能需要画个图~~</p>
+<h5>MYSQL_DUMPS</h5>
+<p>保存模式跟踪数据库导出的模式文件，用于在出错之后将数据库恢复到一个旧的稳定状态。</p>
+<h3>MySQLStreamer 工作机制</h3>
+<p><img alt="MySQLStreamer的工作方式" src="https://static001.infoq.cn/resource/image/d0/44/d05d23406ae3bc3db8bdf43484e05244.jpg"></p>
+<p>在 MySQLStreamer 进程启动时，它必须先去 ZooKeeper 上获取一个锁，然后才可以开始消息处理。获取锁的操作目的是避免在一个集群上会运行多个 MySQLStreamer 实例。在一个集群上运行多实例的问题在于日志复制本身是有顺序的，在某些场景下我们必须保留表内和表间的日志顺序。保证只有一个 MySQLStreamer 实例在处理日志，就可以保留日志顺序，避免消息被重复处理。</p>
+<ol>
+<li>
+<p>MySQLStreamer 利用 Binlog Parser 从源数据库中获取事件。对于<strong>数据事件</strong>，就从中提取表的模式信息，并发送给 Schematizer 服务。<br>
+Schematizer 服务会返回相应的 Avro 模式和 Kafka Topic。Schematizer 服务是幂等的，不管你调用多少次，只要你发给它的是相同的建表语句，那它就会返回相同的 Avro 模式和 Kafka Topic。</p>
+</li>
+<li>
+<p>MySQLStreamer 用收到的 Avro 模式将数据事件打包，然后发布到 Kafka Topic 中。Yelp 数据管道的 Kafka 生产者会为所有发布到 Kafka 中的事件维护一个内部队列。当它从 Binlog Parser 中收到了一个<strong>模式事件</strong>时，<strong>MySQLStreamer 就先把内部队列里的所有事件全都刷出去，再生成一个检查点，以备万一发生故障时恢复用。然后它再把模式事件应用到模式跟踪数据库上</strong>。</p>
+</li>
+</ol>
+<h3>初始化一个 Topic</h3>
+<p>数据库拓扑架构</p>
+<p><img alt="mysql架构" src="https://static001.infoq.cn/resource/image/b5/20/b58ad9bde720f0ba3b7ac4344d6e8120.jpg"></p>
+<p><em>这是一个使用了mysql,blackhole（黑洞）引擎的分布式架构，关于黑洞引擎描述如下。</em></p>
+<div class="highlight"><pre><span></span><code>在主从之间添加一个分布式master，配置blackhole存储引擎，他起到一个中继的作用，他接收数据但丢其他而不是存储，只是会把master的二进制日志供下层的slave来读取。
+
+第一，让B服务器不再执行查询操作；
+第二，让B服务器不再执行写操作；
+第三，负责多线程为每个从服务器提供数据，那么就不需要在B服务器存储数据了，但是需要提供二进制日志和中继日志，但B服务器又不需要数据库；
+
+把blackhole引擎，用做slave，配置一些过滤规则，比如复制某些表、不复制某些表。然后也作为一个master，带多个slave。这样的好 处是省了一定的网络带宽，如果没有blackhole做中间环节，那么就需要把第一个master的所有日志都传递到各个slave上去。经过 blackhole这一个slave兼master过滤后再传递给多个slave，减少了带宽占用。而使用blackhole引擎的原因是它不占硬盘空间，作为一个中转，只负责记日志、传日志。
+</code></pre></div>
+
+
+<ol>
+<li>创建完 Blackhole 引擎的表之后，</li>
+<li>需要把本地主库上的原始表锁住，以避免导数据的过程中会发生数据更新操作。</li>
+<li>然后我们就把数据一批批的从原始表中拷贝到 Blackhole 表中。</li>
+</ol>
+<p>如上图所示，MySQLStreamer 是连接到某个叶子节点上的，原因是我们不希望初始化过程中产生的日志会被复制到集群中的其它节点上。但我们还是希望在初始化的过程中原始表可以被更新，因此在批量拷数据的操作之间，我们会把原始表解锁一段时间，让本地主库跟上数据复制进度。锁住原始表会导致从本地主库到刷新主库之间的数据复制操作暂时失效，但这样可以保证我们拷到 Blackhole 表中的数据在那个时刻是与本地主库一致的。解锁可以让复制跟上进度，自然也会拖慢初始化过程的速度。但这个过程实际上是非常快的，因为数据没有离开过 MySQL 服务器。每一批导数据操作而导致的复制延迟大概都是微秒级的。</p>
+<h2>第三篇：Yelp 的实时流技术之三：不止是模式存储服务的 Schematizer</h2>
+<p>现有的模式改变问题,Confluent 公司的<strong>Schema Registry</strong>和<strong>Kafka Connect</strong>都是不错的选择,yelp在此之前所以研发了Schematizer</p>
+<h3>Schematizer</h3>
+<p>数据管道的一个重要设计就是将所有数据都模式化，也就是说，所有流经数据管道的数据都必须遵守某种预先定义好的模式，而不是格式随意的。统一的模式表现也让 Yelp 数据管道可以轻松地<strong>整合各种使用不同数据格式</strong>的系统。</p>
+<p>Schematizer 是模式存储服务,使用Apache Avro来表达模式。Avro 有许多我们在数据管道中需要的功能，尤其是模式演进，它是解耦数据生产者和消费者的关键因素之一。</p>
+<h3>我们用不同方法管理模式</h3>
+<p>Schematizer 用两种方法组织和管理模式：从数据生产者的角度和数据消费者的角度。</p>
+<h3>我们这样注册模式</h3>
+<p>当一个数据生产者准备向数据管道发布数据时，它要做的第一件事就是<strong>向 Schematizer 注册模式</strong>，最通用的办法就是直接<strong>注册一个 Avro 模式</strong>。</p>
+<p>对于没有或者<strong>无法创建 Avro 模式的数据生产者</strong>，也可以向 Schematizer 中<strong>加入模式转换器</strong>来把<strong>非 Avro 模式转换成 Avro 模式</strong>。<br>
+MySQLStreamer就是一个代表，它是一个把 MySQL 数据库中的数据发布到数据管道的服务，它只知道 MySQL 表模式。Schematizer 可以把 MySQL 表模式定义转换成相应的 Avro 模式。但如果数据生产者改变了模式定义的话，它必须重新注册。</p>
+<h3>上游模式改变会不会影响下游服务</h3>
+<p>我们通过<strong>模式兼容性</strong>来解决这个问题。在模式注册过程中，Schematizer 会根据模式兼容性来决定 Topic 和新模式之间的对应关系。只有兼容的模式才能延用旧的 Topic。如果有不兼容模式注册上来，Schematizer 会用相同的名字空间和数据源来为新模式注册一个新的 Topic。可以根据自己的需要在合适的时候连上新 Topic。这就让整个系统自动化程度更高，在模式改变时减少人工介入。<br>
+那 Schematizer 又怎么确定兼容性呢？答案就是<strong>Avro 解释规则（Avro resolution rules）。Avro 解释规则保证在相同的 Topic 中，用新版模式打包的消息可以按旧版模式解包，反之亦然</strong>。</p>
+<div class="highlight"><pre><span></span><code>除了 Avro 解释规则，我们也在 Schematizer 中定义了一些自己的规则来支持一些数据管道功能。模式的主键字段被用于在数据管道中做日志压缩。因为对同一个 Topic 来说做日志压缩的主键必须保持一致，所以任何对主键的改动都被认为是不兼容的，会导致 Schematizer 为新模式创建一个新 Topic。而且，当人工不可读（non-PII，Personally Identifiable Information）的模式开始包含人工可读字段时，这样的改动也被认为是不兼容的。人工不可读的数据和人工可读的数据必然分开存储，这样就简化了人工可读数据的安全实现，避免了下游消费者不小心读到一些他们本来没有权限读的数据。
+</code></pre></div>
+
+
+<p><img alt="是否需要新 Topic 的逻辑流程" src="https://static001.infoq.cn/resource/image/75/a3/756e043827405f8ee451d2db884d41a3.jpg"></p>
+<p><strong>模式注册过程是幂等</strong>的。如果把相同的模式注册多次，那只有第一次会产生一个新模式，后面的都直接返回已注册的模式。这就让应用程序和服务可以非常容易地初始化它们的 Avro 模式。许多应用程序和服务都是把 Avro 模式定义在文件中或代码中的，但它们没办法写死模式 ID，因为<strong>模式 ID 是由 Schematizer 管控</strong>的。所以应用程序可以调用模式注册接口来直接注册模式，如果已经存在就把模式信息取回来了，如果不存在就直接注册，一举两得。</p>
+<h3>将模式改变事件处理全部流水线化</h3>
+<p>为了让数据管道可以完全以流水线的方式处理模式改变事件，Schematizer 会根据当前模式和新模式的信息来为下游系统生成<strong>模式迁移计划</strong>。</p>
+<h3>Schematizer 知道所有数据生产者和消费者的信息</h3>
+<p>Schematizer 还会跟进所有数据生产者和消费者的信息，包括哪个团队哪个服务负责生产或消费什么数据，发布数据的频率如何。  Schematizer 可以跳过那些废弃的模式，只检查新模式与 Topic 内剩下的有效的模式的兼容性就可以了。<br>
+所有数据生产者和消费者在启动时都必须提供这些信息。</p>
+<p>所有数据生产者和消费者在启动时都必须提供这些信息。我们决定把它们写到数据管道系统之外的单独的 Kafka Topic 中。这样数据就可以被 Redshift 和 Splunk 处理，也可以导入 Schematizer 和通过前端 Web 界面展示出来。</p>
+<div class="highlight"><pre><span></span><code>我们用的是 Yelp 自行研发的通过Clog写入数据的异步、非阻塞式 Kafka 生产者，这样就不会影响生产者正常地发布数据。另外，这样也可以避免环形依赖，有时候正常的生产者要用相同的信息去注册多次。
+</code></pre></div>
+
+
+<h3>该用哪个 Kafka Topic 呢？Schematizer 会处理好这些细节</h3>
+<p>与<strong>一般意义上的 Kafka 生产者不同</strong>，数据管道的数据生产者不需要事先知道它们应该把数据发送到哪个 Kafka Topic 中。因为 Schematizer 规定了注册上来的模式和 Topic 之间的对应关系，所以<strong>数据生产者只要提供自己序列化数据所使用的模式信息</strong>，就可以从 Schematizer 那里得到正确的 Topic 信息并发布数据了。<strong>将 Topic 信息抽象出去可以让接口更简单易用</strong>。</p>
+<p>对数据消费者也是类似的机制。数据消费都可以或者指定名字空间和数据源，或者指定数据目的方，Schematizer 就会找出那个组内的相应 Topic。这种机制对于数据消费者感兴趣的一组 Topic 可能由于模式的不兼容改变而变来变去的场景尤其有效。它让数据消费者不必再跟踪组内的每一个 Topic。</p>
+<h3>模式很好，文档更好</h3>
+<p>Schematizer 负责管理数据管道中的所有模式，所以把数据的描述信息也保存在它这里就很合适。</p>
+<h3>知识挖掘器 Watson 隆重出场。</h3>
+<p>Schematizer 要求模式的注册方随着模式一起提供文档，然后 Schematizer 会提取文档信息并保存起来。<strong>Watson 实际上是 Schematizer 的一个可视化前端</strong>，它通过 Schematizer 的几个 RESTful API 来获取数据。</p>
+<h3>文档并不是天上掉下来的</h3>
+<p>目前流经我们数据管道的数据主要都来自于数据库。我们用 <strong>SQLAlchemy 模型来为这些数据的数据源和模式整理文档</strong>。在 Yelp，SQLAlchemy用来描述我们数据库中的所有模型。除了 docstring 之外，SQLAlchemy 还允许用户为模型的字段增加额外信息。</p>
+<p>我们开发了自动校验功能来<strong>强制要求所有模型都必须完整地提供了属性描述和文档</strong>，这是绝不会退让的硬性标准。每当有新模型要加入时，如果要求的文档信息不完备，或者没有属主信息，校验就会失败。这些自动校验功能帮助我们朝着 100% 文档覆盖率的目标迈进了一大步。</p>
+<h3>为 Watson 提取高质量文档</h3>
+<p>在深入具体提取流程之前，我们先介绍一下这个过程中的另一个重要模块：<strong>特定应用转换器（Application Specific Transformer）</strong>，简写为 AST。<br>
+<strong>与名字含义一样，AST 从一个或多个数据管道 Topic 中输入消息流，用转换逻辑处理消息模式和数据包，再把转换后的消息输出到另外的数据管道 Topic 中</strong>。<br>
+<strong>提供具体转换处理的转换模块是可以串连起来的，因此可以组合多个模块来做非常细致的转换工作</strong>。</p>
+<p><em>这个是链式处理的效果。</em></p>
+<div class="highlight"><pre><span></span><code>我们用 AST 中的许多个转换模块来依据 SQLAlchemy 模型生成更易理解的数据。因为模块是可以串连的，现在我们只是简单的创建一个从 SQLAlchemy 模型中提取文档和属主信息的转换模块，并把它加入到已有的转换链中。这样，所有模型的文档和属主信息就通过现有管道自动提取并导入 Schematizer 了。实现过程相当简单，并无缝接入管道，所以可以非常有效地生成高质量文档。
+</code></pre></div>
+
+
+<p><img alt="AST 中的转换模块" src="https://static001.infoq.cn/resource/image/c9/7d/c97eda004c8c15dcd1e985a47517ad7d.jpg"></p>
+<h3>合作、贡献与检索</h3>
+<p>第一个功能就是打标签。Watson 允许用户为任意数据源打标签分类。一个数据源可能是个 MySQL 数据库表，也可能是个数据模型。<br>
+Watson 提供的另一个功能是添加注释。</p>
+<div class="highlight"><pre><span></span><code>终端用户对于 Watson 的最大的需求就是检索。我们在 Watson 中实现了简单的检索引擎，让用户可以检索数据的模式、Topic、数据模型描述等各方面信息。在检索后台我们没有用 Elasticsearch，而是选择了Whoosh Python 包，因为它可以帮助我们快速完成开发。就我们目前的检索量来说 Whoosh 的性能足以应付。随着数据规模增大，我们将来会考虑换用其它更易扩展的引擎。
+</code></pre></div>
+
+
+<h2>Yelp 的实时流技术之四：流处理器 PaaStorm</h2>
+<p>我们有没有什么办法来更高效地完成<strong>计算和转换任务</strong>呢？我们还想支持一个复杂的数据流中不同<strong>数据转换操作之间的依赖关系</strong>，尤其是要能优雅地<strong>处理模式改变及上游的故障</strong>。我们还希望系统能实时或者近实时地运行。这样，系统就可以用于业务分析及指标监控。换句话说，我<strong>们需要的是一个流处理器</strong>。</p>
+<p>我们的流处理器是基于<strong>Samza</strong>设计的，目的是提供一些简单的接口，用一种“处理消息”的方法来做数据转换。</p>
+<h3>这名字中有什么含义</h3>
+<p><img alt="数据管道的基本架构" src="https://static001.infoq.cn/resource/image/d4/dd/d4f8e0e1a17c3ceb62f48c094a9b45dd.jpg"></p>
+<h3>减少示例代码</h3>
+<h3>把 Kafka 作为消息总线</h3>
+<p>最初 PaaStorm 是一个 Kafka-to-Kafka 的转换框架，慢慢地才演进成也支持了其他类型的终端节点。把 Kafka 做为 PaaStorm 的终端节点简化了很多东西：每个对数据感兴趣的服务都可以注册到 Topic 上，关注任意转换过的数据或者原始数据。</p>
+<h3>用 Storm 处理一切</h3>
+<p>向无环图<br>
+象 Storm 一样，PaaStorm 通过转换模块（象 Bolt 一样）提供对数据流的源（象 Spout 一样）的实时转换。</p>
+<h3>PaaStorm 内部机制</h3>
+<p>PaaStorm 的核心抽象叫做 Spolt（Spout 和 Bolt 的结合物）。象名字表示的一样，Spolt 接口也定义了两个重要的东西：一个输入数据源，一种对那个源的消息数据进行的某种处理。</p>
+<p>值得一提的是数据管道中的所有消息都是不可修改的。要得到一条修改过的消息，就要创建一个新的对象。而且，因为我们在为消息体中增加一个新字段（就是那个增加的“大写字母的 name”字段），新消息的模式已经改变了。在生产环境中，消息的模式 ID 是从来都不能写死的。我们要依靠Schematizer服务来为一条修改过的消息注册并提供合适的模式</p>
+<h3>与 Kafka 相关的处理是怎样的</h3>
+<p>Spolt 中没有什么代码是与 Kafka Topic 相交互的。这是因为在 PaaStorm 中，所有真正的 Kafka 接口相关处理都是由一个内部实例（恰好也叫 PaaStorm）完成的。PaaStorm 实例会把一个特定的 Spolt 与对应的源和目的关联起来，并把消息送给 Spolt 处理，再把 Spolt 输出的消息发布到正确的 Topic 上去。</p>
+<p><img alt="每个 PaaStorm 实例都用一个 Spolt 初始化" src="https://static001.infoq.cn/resource/image/b6/ed/b69e728d91c139be2b734bd9b2e2bded.jpg"></p>
+<p>从内部来看，PaaStorm 运行体的主方法也是惊人的简单，伪码如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_counters</span><span class="p">(),</span> <span class="n">Producer</span><span class="p">()</span>
+<span class="k">as</span> <span class="n">producer</span><span class="p">,</span> <span class="n">Consumer</span><span class="p">()</span>
+<span class="k">as</span> <span class="n">consumer</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">consumer</span><span class="o">.</span><span class="n">get_message</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">increment_consumer_counter</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">downstream_message</span> <span class="ow">in</span> <span class="n">spolt</span><span class="o">.</span><span class="n">process_message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+                <span class="n">producer</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">downstream_message</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">increment_producer_count</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>这个运行体先做了一些设置：初始化了生产者和消费者，以及消息计数器。然后，它一直等待上游 Topic 中的新数据。如果有新数据到来，就用 Spolt 处理它。Spolt 处理之后会输出一条或多条消息，生产者再把它发布到下游的 Topic。</p>
+<h3>关于状态保存</h3>
+<p>为了方便实现这个功能，PaaStorm 的 Spolt 在处理一条原始消息时，会把与这条原始消息相对应的在上游 Topic 中的 Kafka 偏移量也加到转换后的包里。转换后的消息随后会在生产者的回调函数中把这个偏移量传回来。这样，我们就可以知道与下游 Topic 中最后一条消息对应的上游 Topic 的偏移量了。因为回调函数只有在生产者成功地把转换后的消息发布出去之后才会调用，也就意味着原始消息已经被成功处理了，在这种情况下，消费者就可以很放心的在那个回调函数中提交这个偏移量了。万一发生崩溃，我们可以直接从还没有被完全处理的上游消息那里开始继续处理。</p>
+<h3>PaaStorm 的未来</h3>
+<p>在将来，我们希望能把 PaaStorm 的内部换成Kafka Stream或者Apache Beam，主要的障碍是对 Python 的支持程度如何，我们尤其看重的是对终端节点的支持。总之，在有开源的 Python 流处理项目成熟之前，我们会一直把 PaaStorm 用下去。</p>
+<h2>Yelp 的实时流技术之五：数据管道之 Salesforce Connector</h2>
+<h3>数据管道</h3>
+<p>于是我们开始收集需求。我们认为新的解决方案需要下面这些：</p>
+<ul>
+<li>实时处理</li>
+<li>保证“至少一次提交”</li>
+<li>自带监控和告警等功能</li>
+<li>由配置驱动模式之间的转换</li>
+<li>可以很容易地增加新字段和转换</li>
+</ul>
+<p><img alt="转换框架,数据管道集成方法 " src="https://static001.infoq.cn/resource/image/6c/e0/6c3138d97a4fdc87b8b2bf5986109ee0.png"></p>
+<h3>转换器（Transformer）</h3>
+<p>我们采用了一个名为PaaStorm的项目作为我们的 Kafka-to-Kafka 处理器.在保留了 Storm 的范式的前提下，我们构建了一个通用的转换器，可以生成许多实例，处理各个 Topic 中的要发往 Salesforce 的原始数据。<br>
+在处理源 Topic 时，每个实例都会从一个 YAML 文件中得到转换步骤，然后再做拷贝、移动和（或）值映射操作。<br>
+每个转换器都会向一个新的 Kafka Topic 中发布序列化后的 Salesforce 对象，供上传器消费并发往 Salesforce。</p>
+<h3>上传器（Uploader）</h3>
+<h3>评估</h3>
+<h3>挑战</h3>
+<p>我们注意到在处理失败的更新操作中有很大部分都是在 <strong>Salesforce 一侧超时</strong>了，或者是由于没能成功的为<strong>某行数据获取锁而被拒绝</strong>了。这两种问题的根本原因都在于我们在 Salesforce 的程序中使用了大量的<strong>触发器和回滚操作</strong>。把这样的处理尽可能地挪到异步处理的过程中，就可以减少我们锁定单条记录的时间，也就减少了每条写操作的处理时间。</p>
+<p>另一个要解决的问题是<strong>依赖关系</strong>。我们本来的数据源（MySQL）有限制依赖，而 Kafka 并没有。虽然写到每个 Kafka Topic 中的消息都是保证有序的，但是我们并不能保证这些 Topic 中的数据会以某个确定的速度被处理。在各张表都彼此依赖的情况下这个问题就很严重，因为一张表中的数据可能会比另一张表的数据更先被读取和更新，导致数据在一定时间内处于不一致的状态。</p>
+<div class="highlight"><pre><span></span><code>一个常见的例子就是广告商的数据记录会比用户的数据稍早到一会。因为广告商的数据中包含一个指向 User 表的外键字段，写入就会失败。因此我们就要跟踪哪些数据是因为不符合依赖约束而写入失败的，然后再由上传器在确定依赖关系满足了之后再重试。把上传的操作按依赖顺序序列化并处理重试，这可以覆盖我们绝大多数的用例，尽管这意味着我们因此没办法达到一个很高的并行度。
+</code></pre></div>
+
+
+<p>还有一个问题，就是我们的数据没有全放在一个单一的数据库里面，所以对我们来说可用的就是单条的数据记录。为了解决这样的问题我们开发了新功能，<strong>读两个 Topic 中的数据并把它们关联起来，然后再把关联后的数据重新发布出去</strong>。</p>
+<h2>Yelp 的实时流技术之六：近实时地将 Kafka 中的数据流入 Redshift</h2>
+<p>目前为止我们标出了核心数据管道基础架构的三个主要部分。</p>
+<ul>
+<li>第一个是MySQLStreamer，它把 MySQL 上的操作复制出来并以流的方式发布到基于模式的 Kafka Topic 中。</li>
+<li>第二个是Schematizer，在这里集中化地保存了各个 Kafka Topic 中的真实信息。它以持久化存储的方式保存了在某个特定的 Topic 中用于编码数据的Avro 模式信息、数据的属主、各个字段的文档等。</li>
+<li>最后，是流处理器PaaStorm，它让我们可以更容易地消费数据管道中的数据，做转换、再发布回数据管道。把这些工具一起使用，就可以得到各自关心的数据了。</li>
+</ul>
+<h3>数据仓库已死！数据仓库永生</h3>
+<p><em>这里有一套旧的ETL方案。</em></p>
+<h3>Redshift 连接器: 新的希望</h3>
+<p><img alt="Redshift 连接器概要视图" src="https://static001.infoq.cn/resource/image/4e/dc/4edcaa2a35260434422316ca351972dc.png"></p>
+<p>新系统必须有以下功能：</p>
+<ul>
+<li>不需要写定制的 ETL 就可以写入新表</li>
+<li>自动适应模式转换</li>
+<li>快速写入</li>
+<li>可以从失败中优雅地恢复</li>
+<li>幂等地写操作</li>
+<li>支持多个 Redshift 集群</li>
+</ul>
+<p>PaaStorm 的 Spolt 已经提供了必要的抽象，来完成这两个任务。</p>
+<h3>S3 Spolt</h3>
+<p><img alt=" S3 Spolt 的功能" src="https://static001.infoq.cn/resource/image/4e/04/4ea6c9b07a5fc99953ffcf65c2e0b304.png"></p>
+<p>S3 Spolt 用于从数据管道上游的 Kafka Topic 中读出数据，并把数据写入 S3 的文件之中。<br>
+上游的 Kafka Topic 中可能是从 MySQL 表中出来的原始行数据，可能是一个开发者批量写入数据管道的原始消息，也可能是某个中间环节的 Spolt 对这些原始数据做的一系列转换的一个中间结果输出。</p>
+<h3>批量写入 S3</h3>
+<h3>向 Redshift Spolt 发信号</h3>
+<h3>检查点与恢复</h3>
+<p>S3 Spolt 处理这样故障的方式很优雅。重启时，它会起一个轻量级的消费者线程，读读这个 Spolt 的下游 Topic 的最后一条消息。<br>
+最后一条消息中包含了上游 Topic 的消息以及它最后的偏移量，S3 Spolt 可以用这些信息来在必要时找回它在一个 Kafka Topic 中的位置。</p>
+<h3>Redshift Spolt</h3>
+<h3>批量创建 S3 清单文件</h3>
+<h3>做模式转换</h3>
+<p>Spolt 会检查三种情况：目标表不存在、目标表存在但是模式不同、目标表存在而且模式也相同。</p>
+<h3>分阶段将数据迁移入目标表</h3>
+<p><em>后面的脱离业务，暂时跳过。</em></p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20200112.html">redis 命令参考</a></li>
+    <li class="list-group-item"><a href="/pages/20191231.html">品牌系统与 Supreme 的成功之道</a></li>
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
+    <li class="list-group-item"><a href="/pages/20190914.html">从技术演变的角度看互联网后台架构</a></li>
+    <li class="list-group-item"><a href="/pages/20190826.html">美国是不是以孝治国</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/ji-zhu-wen-zhang.html">技术文章</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/shang-ye.html">商业</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/she-hui-ke-xue.html">社会科学</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/an-li.html">案例</a>
+    </li>
+    <li class="list-group-item tag-0">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/crm.html">CRM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/django.html">django</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/docker.html">docker</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gong-ye-hu-lian-wang.html">工业互联网</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hong-guan-jing-ji.html">宏观经济</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/huo-bi.html">货币</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jin-rong.html">金融</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kuang-jia.html">框架</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/nei-rong.html">内容</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/qi-quan-ding-jie.html">期权定价</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/redis.html">redis</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/rong-qi-hua.html">容器化</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/she-jiao.html">社交</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/sheng-tai.html">生态</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/shu-ju.html">数据</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/tou-zi.html">投资</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wen-hua.html">文化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li.html">心理</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/ying-xiao.html">营销</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/yun-wei.html">运维</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zheng-ce.html">政策</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zheng-zhi.html">政治</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zhong-jian-jian.html">中间件</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zi-xun.html">资讯</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
