@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>搞了个机器学习交易系统，5000 美元投资变成了 20 万 - 米de世界</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/pages/20200107.html">
+
+        <meta name="author" content="Mii" />
+        <meta name="keywords" content="投资,系统,交易" />
+        <meta name="description" content="2020-01-07 原文 这种交易可以用算法来描述吗 时间尺度是一个很重要的因素。相比实时（秒级别）数据，日交易数据更随机一些。 因为时间尺度越大，市场活动受政治新闻、法律裁决、公众情绪、社会炒作、商业决策等因素的影响就越大。交易机构的大笔交易也会带来重大影响，但这种情况不会经常发生。这些都不是可被算法利用的，我们也无法对此进行建模。 如果把市场活动定位到分钟或者秒级别，就可以找到一些模式。这些模式可以被算法利用，我们的目标就是利用这些模式来盈利。 越短越好预测的理论。 系统关键特性 在交易领域，我们把这种竞争优势叫作 edge，可能来自这些方面： 交易延迟：我们与交易平台之间的连接比别人更快。这意味着我们可以更快地获取到市场数据，并抢在别人之前提交订单。金融机构通常不吝花费数百万美元来最小化与交易平台之间的延迟。 基础设施：基础设施具有更高容错性和更好的性能，或者比其他竞争者能够更好地处理边缘情况。 数据：我们可能比其他人掌握了更好的数据。这里的“好”可以指很多方面，比如，数据是从更可靠的来源收集来的，还经过仔细的清理和预处理。 模型：我们基于数据构建出更好的预测模型。我们可能使用了最新的深度学习技术，掌握了更优化的函数、更好的特征和不一样的训练算法 …" />
+
+        <meta property="og:site_name" content="米de世界" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="搞了个机器学习交易系统，5000 美元投资变成了 20 万"/>
+        <meta property="og:url" content="/pages/20200107.html"/>
+        <meta property="og:description" content="2020-01-07 原文 这种交易可以用算法来描述吗 时间尺度是一个很重要的因素。相比实时（秒级别）数据，日交易数据更随机一些。 因为时间尺度越大，市场活动受政治新闻、法律裁决、公众情绪、社会炒作、商业决策等因素的影响就越大。交易机构的大笔交易也会带来重大影响，但这种情况不会经常发生。这些都不是可被算法利用的，我们也无法对此进行建模。 如果把市场活动定位到分钟或者秒级别，就可以找到一些模式。这些模式可以被算法利用，我们的目标就是利用这些模式来盈利。 越短越好预测的理论。 系统关键特性 在交易领域，我们把这种竞争优势叫作 edge，可能来自这些方面： 交易延迟：我们与交易平台之间的连接比别人更快。这意味着我们可以更快地获取到市场数据，并抢在别人之前提交订单。金融机构通常不吝花费数百万美元来最小化与交易平台之间的延迟。 基础设施：基础设施具有更高容错性和更好的性能，或者比其他竞争者能够更好地处理边缘情况。 数据：我们可能比其他人掌握了更好的数据。这里的“好”可以指很多方面，比如，数据是从更可靠的来源收集来的，还经过仔细的清理和预处理。 模型：我们基于数据构建出更好的预测模型。我们可能使用了最新的深度学习技术，掌握了更优化的函数、更好的特征和不一样的训练算法 …"/>
+        <meta property="article:published_time" content="2020-01-07" />
+            <meta property="article:section" content="经济和金融" />
+            <meta property="article:tag" content="投资" />
+            <meta property="article:tag" content="系统" />
+            <meta property="article:tag" content="交易" />
+            <meta property="article:author" content="Mii" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+米de世界            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+                        </li>
+                        <li >
+                            <a href="/category/ji-zhu-wen-zhang.html">技术文章</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
+                        </li>
+                        <li >
+                            <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
+                        </li>
+                        <li >
+                            <a href="/category/shang-ye.html">商业</a>
+                        </li>
+                        <li >
+                            <a href="/category/she-hui-ke-xue.html">社会科学</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pages/20200107.html"
+                       rel="bookmark"
+                       title="Permalink to 搞了个机器学习交易系统，5000 美元投资变成了 20 万">
+                        搞了个机器学习交易系统，5000 美元投资变成了 20 万
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-01-07T00:00:00+08:00"> 周二 07 一月 2020</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/tou-zi.html">投资</a>
+        /
+	<a href="/tag/xi-tong.html">系统</a>
+        /
+	<a href="/tag/jiao-yi.html">交易</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>2020-01-07<br>
+<a href="https://mp.weixin.qq.com/s/GqEQCDoxUIHqlMhbrHzYDQ">原文</a></p>
+<h2>这种交易可以用算法来描述吗</h2>
+<p>时间尺度是一个很重要的因素。相比实时（秒级别）数据，日交易数据更随机一些。<br>
+因为时间尺度越大，市场活动受政治新闻、法律裁决、公众情绪、社会炒作、商业决策等因素的影响就越大。交易机构的大笔交易也会带来重大影响，但这种情况不会经常发生。这些都不是可被算法利用的，我们也无法对此进行建模。<br>
+如果<strong>把市场活动定位到分钟或者秒级别，就可以找到一些模式</strong>。这些模式可以被算法利用，我们的目标就是利用这些模式来盈利。</p>
+<p><em>越短越好预测的理论。</em></p>
+<h2>系统关键特性</h2>
+<p>在交易领域，我们把这种竞争优势叫作 edge，可能来自这些方面：</p>
+<ul>
+<li>交易延迟：我们与交易平台之间的连接比别人更快。这意味着我们可以更快地获取到市场数据，并抢在别人之前提交订单。金融机构通常不吝花费数百万美元来最小化与交易平台之间的延迟。</li>
+<li>基础设施：基础设施具有更高容错性和更好的性能，或者比其他竞争者能够更好地处理边缘情况。</li>
+<li>数据：我们可能比其他人掌握了更好的数据。这里的“好”可以指很多方面，比如，数据是从更可靠的来源收集来的，还经过仔细的清理和预处理。</li>
+<li>模型：我们基于数据构建出更好的预测模型。我们可能使用了最新的深度学习技术，掌握了更优化的函数、更好的特征和不一样的训练算法。</li>
+<li>准入市场：我们可以进入那些不是所有人都可以进入的市场。例如，南韩的一些交易平台只有本国公民可以参与。为避免与美国国税局发生瓜葛，很多国际交易平台不接受美国公民。</li>
+</ul>
+<p>人们常犯的<strong>一个错误是重度依赖模型</strong>，因为它看起来太“性感”了。很多开发者试图通过深度学习或增强深度学习算法来构建交易系统，但大部分都失败了。他们自认为他们的优势在于模型，却忽略了其他因素。他们没有优化服务器布局，使用开源软件下单和收集数据，还使用非常容易获取到的公开数据集来训练模型。或许，这可以给他们带来一点优势，但不足以弥补在其他方面犯下的错误。</p>
+<p>我也使用了一些机器学习模型，但最大的优势还是来自于花了很大成本在构建基础设施。几乎所有的开源交易软件都不够好，将它们用于学习目的或许可以，但并不适合用在现实当中。在一开始我也使用了开源组件，但经过多次迭代之后，我都是自己开发组件，包括实时数据收集、清理、回测和模拟，订单的管理和规范化，监控以及实时交易。</p>
+<h2>选择市场</h2>
+<p>市场就是指在某个交易平台进行交易的资产。例如，BTC/USDT 在 Binance 上交易，BTC/USD 在 Coinbase 上交易。现在有数百个不同的数字货币交易平台，每一个交易平台都可以交易数十种资产。我们该怎么选择？最理想的市场应该具<strong>有高流通性，交易手续费低，快速且安全可靠</strong>。</p>
+<p>总的来说，流通性是指在不显著影响市场价格的情况下能够交易的数量。流通性好的市场价差低，滑点小，交易成本低，可以进行大额交易。交易量是衡量流通性的一个指标。具有高交易量的市场通常（但不一定）具有高流通性。可惜的是，现在还没有公开评价体系可以告诉我们哪个交易平台是可靠的，即使 cer.live 有在尝试。搜索网站没什么用，因为交易平台会向网站支付费用，让自己的排名更靠前。</p>
+<p>评估<strong>市场唯一可靠的方式是自己收集和分析数据</strong>。交易是真是假？价差和滑点的分布是怎样的？一些交易平台通过算法<strong>明目张胆地造假交易数据</strong>，还有一些使用更复杂的技术让自己的数据看起来更真实。</p>
+<h2>具体实现</h2>
+<p>交易成本算法实现为了能够盈利，我们的交易获利必须高过所有交易成本的总和。对于大多数人来说，交易手续费占了大头，滑点通常会被忽略，但实际上它也很重要。假设我们买入 qty 个 BTC，并在稍后某个时间点卖出，那么净交易成本就是：</p>
+<p>trade_cost(qty) = (2*qty*exchange_fee) + (qty*spread) + slippage_buy(qty) + slippage_sell(qty)(2*qty * exchange_fee) 是交易手续费。假设收费费是 0.01%，那么一次买入和一次卖出就需要支付两次费用。</p>
+<p>(qty * spread) 是买卖价差，我们在买入价买入，在卖出价卖出。即使市场完全不发生变动，我们仍然会在略高于卖出价的价格买入。价差会随时间发生变化，所以需要把它纳入到交易决策中。如果我们在 Binace 上交易 BTC/USDT，单日的价差分布可能像下面这样。大多数时候不到 1 美元，非流通时间可以达到 5 美元以上。</p>
+<p><img alt="买卖价差" src="https://mmbiz.qpic.cn/mmbiz_png/YriaiaJPb26VPbljNicvYQicMtfxpvrBCR14RIEGEHfYTEibHMriavdCia7f4wjhqknRYTHWf7abJRian3aGL7p3tbiafqg/640">  </p>
+<p>slippage_buy(qty) 和 slippage_sell(qty) 是因市场流通性不足而导致的价格滑点。交易量越大，我们要付出的滑点成本就越高。Binance 上的 BTC/USDT 滑点分布情况如下所示。每一行对应一个特定的交易规模，范围从 0.1 到 2.0 BTC，X 轴表示成本占支付价格的百分比。在流通性较低时进行交易意味着滑点成本很容易超过交易费用和价差，就像我们从图中看到的那样。</p>
+<p><img alt="价格滑点" src="https://mmbiz.qpic.cn/mmbiz_png/YriaiaJPb26VPbljNicvYQicMtfxpvrBCR141WlLt2A12vpMtGmyBQmBJdR3kHUBCyOibzGnOLSjWSORDGR8a6icjZPQ/640">  </p>
+<p>这些成本有多重要？这要视具体情况而定。如果我们每天只交易一次，更关注市场大幅度波动，那么就可以忽略大部分的成本。如果价格浮动可以达到 10%，那么 0.5% 的交易手续费根本不算什么。<strong>交易频次越高，这些成本就越重要</strong>。市场在短时间内一般不会出现太大波动，所以交易成本就变得尤为重要。</p>
+<p>另一个重要因素是交易量。交易量越大意味着越高的利润，但交易费用也更高。<strong>交易费用和价差与交易量成线性关系，但滑点不是。使用平仓限价订单而不是市场订单是保护自己不受大幅滑点成本影响的一种方法，但需要额外的基础设施来管理部分订单。同样，交易频次越高，我们在不被交易成本抵消的情况下获利的交易量就越少</strong>。</p>
+<h2>时间维度问题</h2>
+<p>我们该怎么知道是应该进行高频交易还是每天只交易一次？为了做出权衡，我们先来看看这两种极端的情况。</p>
+<p>时间越短，市场越是不会发生大幅度波动。每次交易只会获得非常少的利润，但我们可以提高交易频次。但正如之前讨论的那样，高交易成本会把这些利润都吃掉。即使我们能够完美地预测毫秒级的市场波动，这个模型也不会太管用。向交易平台发送一个 HTTP 请求并等待交易平台的匹配引擎处理，这通常需要几十到几百毫秒，等到订单处理完毕，市场又发生了变化，之前的预测就失效了。</p>
+<p>另一个极端情况是基于某些东西进行交易，或者进行每日交易。隔天交易让我们完全可以忽略交易成本，延迟也变得不那么重要了。但是，较长时间的市场波动会受到现实世界因素的影响，比如社会新闻、事件或其他随机事件（比如机构投资活动）。如果我们只是依赖模式匹配（机器学习），就别指望能做好预测。我们能够掌握的这类数据很少，根本不足以用来训练模型。我们也无法可靠地测试和评估我们的算法。数据少，噪音多，基于这点数据所做的测试无异于猴子扔飞镖。</p>
+<p>所以，<strong>我们需要在覆盖交易成本、掌握足够的数据集和从数据中识别模式这些因素之间做出权衡。时间尺度越小，模式和样本就会越多，但也要注意交易成本和延迟，它们都受市场流通性和交易 API 的影响</strong>。</p>
+<p>除了使用自然时钟间隔（比如秒），我们还可以使用基于其他度量指标的间隔，例如交易量。例如，我们可以把间隔定义为 1.0 BTC，而不是 1 秒，这种交易可以一秒或者一分钟发生一次，具体取决于市场的繁忙情况。这是因为我们希望在市场活动剧烈的时候更频繁地交易，而在不那么剧烈的时候少交易一些。基于交易量的聚合数据包含了更为规范化的特征分布和标签，对于机器学习算法的训练更为有利。不过这种交易方式也有一些缺点。例如，基于交易量进行交易有可能会太晚，因为在交易高峰之后，市场又往前移动了。理想情况下，我们要先于其他市场参与者下单，也就是抢在交易量上升之前。</p>
+<p>总的来说，时间尺度和如何定义时间间隔是需要加以优化的超参数。流通性高、交易费用低、API 延迟低，这样的市场可以让我们在更频繁的交易中获得更多利润。</p>
+<p><em>如何确定交易量单位是个问题。</em></p>
+<h2>优化函数</h2>
+<p>我们需要选择最优的指标数据来训练机器模型，而基于原始价格数据训练回归模型是一个显而易见的选择。但价格数据并不是固定的，而大多数现代机器学习技术需要或者使用固定数据才会获得更好的效果。所以，<strong>在金融领域，我们通常对收益而不是价格进行建模</strong>。时间 t 的收益 r(t) 表示如下：</p>
+<p>r(t) = (p(t) / p(t-1)) - 1收益比零大说明价格上涨，小于零说明价格下跌。时间 t 可以用上一小节讨论的那些方式来定义。你可以计算每分钟的收益，一天的收益，或者基于交易量的收益。</p>
+<p>另一个是对数收益，它衡量的是同样的指标，但更接近正太分布，而且为训练机器学习算法提供了更为便利的统计属性：</p>
+<p>logr(t) = log(p(t)) - log(p(t-1))我们可以考虑基于固定时间尺度的对数收益数据训练回归模型，这几乎成了一个标准。不过，我们还有其他选择。例如，在《金融机器学习进展》这本书中，作者讨论了如何选择合理的阈值，并将数据转换为分类问题。</p>
+<p>在实际当中，我们有很多种方式来定义 p(t)。对于 BTC，它通常是指中间价。不过，我们不能基于中间价进行交易。在买入时，价格高于中间价，在卖出时，价格低于中间价。之前已经说过，我们还需要付出滑点成本，它是交易量的函数。所以，价格实际上是时间、交易（买入还是卖出）和交易量的函数，即 p(t,s,q)。上面的公式应该是这样的：</p>
+<p>logr(t, quantity) = log(p(t, BUY, quantity)) - log(p(t-1, SELL, quantity))我们还有其他类型的价格可以使用，比如微价格（microprice）。选择合适的价格类型究竟有多重要？这取决于时间尺度和市场流通性。在流通性好、低滑点成本的市场里，基于中间价的收益模型更为有效，但在流通性差的市场中则完全无用。</p>
+<p>训练、回测和实时交易一般的交易算法训练流程是这样的：</p>
+<ul>
+<li>数据收集</li>
+<li>数据预处理和清理</li>
+<li>创建特征</li>
+<li>训练模型</li>
+<li>回测</li>
+<li>实时交易</li>
+</ul>
+<p>我们在模型训练期间所做的优化，比如对数收益的预测准确性，只是盈亏指标的代理指标。<strong>盈亏指标才是我们真正关心的，所以我们需要进行回测</strong>。回测是指使用训练好的模型基于历史数据进行全方位的模拟。商业版回测软件可能会非常昂贵，它们可以<strong>模拟交易延迟、非标准订单类型、交易佣金和滑点</strong>。它们还可以自动优化超参数，输出图表和统计数据用于评估模型。</p>
+<p>但不管回测软件有多好，它们与真实的交易环境仍然是不一样的。</p>
+<p><img alt="优化" src="https://mmbiz.qpic.cn/mmbiz_jpg/YriaiaJPb26VPbljNicvYQicMtfxpvrBCR14owicZPFaKQ4KDY4zQN8RrjNFUm0qLNZEnNh67uro4oCbHu4RpZPWicLQ/640">  </p>
+<p><strong>虽然回测软件可以模拟延迟，但真实世界是很难预测的</strong>。真实世界中的延迟在低活动期间可能很稳定，但在高活动期间会很大。它们还具有季节性，API** 也是如此。在模拟环境中，一切都很完美，但在现实世界中，API 会出问题，比如请求会被限制，在繁忙时段订单会被随机拒绝。在真实世界中，我们可以影响其他市场参与者，但这些行为无法模拟。回测还会受数据的限制。我们从交易 API 获得的历史数据通常带有噪音，而且不完整——我们无法保证它们是否能够真实反映当前的交易状态。</p>
+<p>因此，回测主要作为一种过滤器，或者作为一种乐观的估计。即使模型在回测时表现不好，在现实世界中仍然有可能表现好。模型在回测时表现很好，并不能保证在现实世界中一定会表现好。除非你非常小心，否则回测容易出现过拟合，并可能产生错误的结果。</p>
+<p>这也是为什么很多有关交易系统的学术论文在实际当中不是很管用。研究的最后一步通常是基于历史数据进行回测，如果模型运行得很好，研究人员就宣告大功告成，但他们忽略了一个事实，即他们的模型在真实的环境中可能永远无法盈利。研究人员无法使用实时交易基础设施来测试模型，如果他们可以做到，而且算法在现实世界中运行良好，那他们肯定不会把论文发表出来。</p>
+<p>训练交易机器学习算法是很困难的。在很多其他机器学习场景中，训练测试性能与实际性能直接相关。例如，如果我们使用恰当的训练 / 验证 / 测试 split 来测试推荐系统，并且数据分布不会随时间发生显著变化，那么我们就可以非常肯定地认为，在测试数据集上表现良好的模型在生产环境中也是如此。在交易领域，我们的训练和回测与现实环境非常不一样，以至于我们无法做出任何保证。我们只能希望基于某种代理指标训练出来的模型在回测时表现良好，也希望它们在现实世界中也有同样的表现。</p>
+<p>其他问题除此之外，我们还有其他很多问题需要解决。</p>
+<ul>
+<li>非 IID 数据：市场数据的分布既不独立也不固定，要训练出准确的模型极具挑战性。这些数据带有噪音。或许市场活动是有模式可循的，但它们通常被一些随机活动隐藏了起来。</li>
+<li>订单重建：在交易和回测基础设施里，订单重建是一个常见的瓶颈。我们该如何有效地走好这一步？交易 API 不稳定，经常出现波动，我们该怎么处理？</li>
+<li>最小化延迟：有哪些手段可以用来最小化端到端的延迟？</li>
+<li>构建特征：哪些特征对于我们的算法来说是最有用的？我们该如何实时地构建这些特征？</li>
+<li>订单管理：因为交易 API 不太稳定，我们需要自己管理订单。一个典型的订单管理系统应该是怎样的？</li>
+</ul>
+<p>容错：如果发生故障该怎么办？我们该怎么恢复？</p>
+<h2>相关资源</h2>
+<p>交易行业是我参与过的最为神秘的一个行业。你在网上找到的相关资料掺杂着各种劣质内容，有很多只是想借机卖东西给你。我接触过的大多数成功的交易员都曾在专业的交易公司工作过，他们在那里学会了诀窍，但不会在网上分享任何东西。在金融领域，分享知识并没有形成一种文化。所以，对于刚进入这个领域的新手来说，这个领域看起来相当复杂，以至于让他们不知所措。实践可能成了最好的学习方式。在金融市场，交易基础设施和高频交易数据价值连城，但加密货币市场的数据对所有人开放，可以作为学习之用。不管怎样，我还是总结了一些有用的资源。</p>
+<ul>
+<li>《金融机器学习进展》——一本严肃的书，介绍了机器学习技术在金融市场的应用。它更多的关注学术方面，有些不是很实用。虽然我并不完全同意这本书所讲的内容，但它仍然很好地介绍了在构建交易系统时遇到的各种挑战和陷阱。</li>
+<li>《高频金融交易入门》——涵盖了自动化交易中使用的常见术语和方法，偏学术，有些东西很难消化，但值得一读。</li>
+<li>《被随机愚弄：隐藏在生活和金融市场中的机会》——不是一本关于交易技术的书，作者是期权交易员，教你如何思考金融市场和生活中随机出现的机会。</li>
+<li>arXiv q-fin——阅读近期发表的研究论文是提出新想法或学习如何思考问题的一种好方法。它们有趣且有教育意义，但请不要太在意结果。正如前面提到的，学者们几乎不会公开发表真正有效的东西。</li>
+</ul>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4>Social</h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4>Recent Posts</h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/pages/20200112.html">redis 命令参考</a></li>
+    <li class="list-group-item"><a href="/pages/20200107.html">搞了个机器学习交易系统，5000 美元投资变成了 20 万</a></li>
+    <li class="list-group-item"><a href="/pages/20191231.html">品牌系统与 Supreme 的成功之道</a></li>
+    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
+    <li class="list-group-item"><a href="/pages/20190914.html">从技术演变的角度看互联网后台架构</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4>Categories</h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/ji-zhu-wen-zhang.html">技术文章</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/shang-ye.html">商业</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/she-hui-ke-xue.html">社会科学</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4>Tags</h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/an-li.html">案例</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/chan-pin.html">产品</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/crm.html">CRM</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/django.html">django</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/docker.html">docker</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/fang-fa-lun.html">方法论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gong-ye-hu-lian-wang.html">工业互联网</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/gui-fan.html">规范</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/hong-guan-jing-ji.html">宏观经济</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/huo-bi.html">货币</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/jia-gou.html">架构</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jiao-yi.html">交易</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/jin-rong.html">金融</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kong-zhi-lun.html">控制论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/kuang-jia.html">框架</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/li-lun.html">理论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/nei-rong.html">内容</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/qi-quan-ding-jie.html">期权定价</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/redis.html">redis</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/rong-qi-hua.html">容器化</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/she-ji.html">设计</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/she-jiao.html">社交</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/sheng-tai.html">生态</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/shu-ju.html">数据</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tou-zi.html">投资</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wei-fu-wu.html">微服务</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/wen-hua.html">文化</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong.html">系统</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xi-tong-lun.html">系统论</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-li.html">心理</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/xin-xi-lun.html">信息论</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/ying-xiao.html">营销</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/yun-wei.html">运维</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zheng-ce.html">政策</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zheng-zhi.html">政治</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zhong-jian-jian.html">中间件</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/zi-xun.html">资讯</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Miinec
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
