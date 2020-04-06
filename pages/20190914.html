@@ -137,23 +137,23 @@
 <p><img alt="2018~??:AI时代" src="https://pic1.zhimg.com/80/v2-9591a31a85583b36088c41bcd974c324_1440w.jpg"></p>
 <p>上图是facebook和uber的机器学习平台使用情况，基本上已经全部进入业务核心。</p>
 <h2>Web Framework</h2>
-<p><img alt="两个问题" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkic9kLhBIaWpteibQeSMHzia5WTdtoJ7dHYIDCicKkZKZOkLnfZMZxqLTnWg/640?wx_fmt=png"></p>
+<p><img alt="两个问题" src="https://pic2.zhimg.com/80/v2-204b4be768437cbf13bc8b47cab3be75_1440w.jpg"></p>
 <p>最为诟病的无非是性能，然而实际上对非实时应用，晚个半秒一秒不应该是大问题，要考虑的是水平扩展scalability，不是实时响应（因为前提就是非实时应用）；其次实在不行你还有websocket可以用。</p>
 <p>重点是要注意到<strong>middleware这个说法在web framework和后端架构中的意义不同</strong>。在web framework中是指具体处理GET/POST这些请求之前的<strong>一个通用处理（往往是链式调用）</strong>，比如可以把鉴权、一些日志处理和请求记录放在这里。但在后端架构设计中的middleware则是<strong>指类似消息队列、缓存这些在最终数据库之前的中间服务组件</strong>。</p>
 <p><em>这一点可以用django的中间件，和分发系统的使用redis作为中间件来区别。</em></p>
-<p><img alt="框架的使用" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicQOcx66RSl8B9ibGKJgtbQtNy8DtfC8zj80bq4bENUoUgfKXprJrTibbQ/640?wx_fmt=png"></p>
+<p><img alt="框架的使用" src="https://pic3.zhimg.com/80/v2-df43d5baa5c5622f11818b1c0587960a_1440w.jpg"></p>
 <p>作为开发者则更多需要考虑如何定义配置文件，一些敏感参数如token、密码怎么传进来，开发环境和生产环境的配置如何自动切换，单元测试怎么搞，代码目录怎么组织。</p>
 <h2>Middleware</h2>
-<p><img alt="中间件定义" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicr45PzhAMfyctX2MGAa04o8mRI9zouibb4lcrOutC4SQqLEYvdI1MDiaw/640?wx_fmt=png"></p>
-<p><img alt="中台与中间件区别" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicydkxehQtNLZpn1bXZjtYfSYia4v1nHEeajs3q9Ot4l6jQAoHwic0jXQw/640?wx_fmt=png"></p>
+<p><img alt="中间件定义" src="https://pic3.zhimg.com/80/v2-1ea807b76a16822bd099685837c44e26_1440w.jpg"></p>
+<p><img alt="中台与中间件区别" src="https://pic1.zhimg.com/80/v2-590b5a370040ce103147825b1dbc4b00_1440w.jpg"></p>
 <p>中间件的演化，一推荐系统为例</p>
-<p><img alt="早期" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicGwic4JxPjyvwkjSAarMcS1gLy40TKD7YSRCicUvljdSLLVd92tbXYfjg/640?wx_fmt=png"></p>
+<p><img alt="早期" src="https://pic4.zhimg.com/80/v2-d5ee9670feeda1685664ca268939d7ab_1440w.jpg"></p>
 <p>推荐系统，对数据少用户少的情况下，简单的mysql即可，比如早期论坛的什么top 10热门话题啊，最多回复的话题啊，都可以视为简单的推荐，数据量又不大的情况下，直接select就可以了。</p>
-<p><img alt="优化，引入缓存" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicA6m5eZXNepxA9hFvKzOabgO6LTBHEOHrpCXpjBWfhtl2WDRdVG6UWg/640?wx_fmt=png"></p>
+<p><img alt="优化，引入缓存" src="https://pic4.zhimg.com/80/v2-10cc0cc71cb0dd2ad74c5ed7a0284f53_1440w.jpg"></p>
 <p>那么，如果用户量多了呢？每次都去搜数据库，同时在线用户又多，那对数据库的压力就巨大了。这时候就是引入缓存，memcached、redis就出现了。</p>
 <p>简单的做法就是把搜索条件作为key，把结果作为value存入缓存。打个比方你可以把key存为 20:40:beijing:male (20到40岁之间北京的男性），然后把第一次搜索的结果全部打乱shuffle后，存前1000个，10分钟过期，再有人用类似条件搜索，就直接把缓存数据随机挑几个返回。放心，一般来说不会有人10分钟就把1000个用户的资料都看完了，中间偶有重复也没人在意（用世纪佳缘、百合网啥的时候看到过重复的吧）。</p>
 <p>加缓存是为了解决访问速度，减轻数据库压力，但是并不提高推荐精准度。如果我们要提高推荐效果呢？</p>
-<p><img alt="引入离线排序/搜索引擎" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicxTsyYVRH7lg964wUCjxeVqTYtlWxIjdQeMicqQqhfgYqgJaUP3JUSrA/640?wx_fmt=png"></p>
+<p><img alt="引入离线排序/搜索引擎" src="https://pic2.zhimg.com/80/v2-43103b4967ade36bc23a4c588aa93319_1440w.jpg"></p>
 <p>提高推荐效果，在机器学习之前有两种做法：</p>
 <ul>
 <li>
@@ -163,17 +163,17 @@
 <p>采用离线批处理。固然可以用hadoop，但是就太杀鸡用牛刀了。常见的是定时批处理任务，按某种规则划分用户群体，对每个群体再做全量计算后把推荐结果写入缓存。这种可以做很繁复准确的计算，虽然慢，但效果往往不错。这种做法也常用在手机游戏的PvP对战列表里面。</p>
 </li>
 </ul>
-<p><img alt="大数据时代" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkickk9fvZF1OKvR6WiaJs9cVns4eWUYfPqhwMribDD8Lkr3lfzaLYOgybJw/640?wx_fmt=png"></p>
+<p><img alt="大数据时代" src="https://pic2.zhimg.com/80/v2-2c8b89684633800b68fd49df95eb8491_1440w.jpg"></p>
 <p>这种对数据进行实时（近实时）处理的需求也带动了后端体系的大发展，kafka/spark等等流处理大行其道。这时候的后端体系就渐渐引入了消息驱动的模式，所谓消息驱动，就是对新的生产数据会有多个消费者，有的是满足实时计算的需求（比如司机信息需要立刻能够被快速检索到，又不能每次都做全量indexing，就需要用到spark），有的只是为了数据分析，写入类似cassandra这些数据库里，还有的可能是为了生成定时报表，写入到mysql。</p>
-<p><img alt="机器学习/AI时代" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicc77iaNpMgZavlj9RzVzHbIias1y1VHqeiccDWRKXAYl8gx7jF7mLav3DQ/640?wx_fmt=png"></p>
+<p><img alt="机器学习/AI时代" src="https://pic1.zhimg.com/80/v2-aa8a341961199f2f90a5ae0d59af5298_1440w.jpg"></p>
 <p>到了2017之后，前面千奇百怪的后端体系基本上都趋同了。kafka的实时消息队列，spark的流处理（当然现在也可以换成flink，不过大部分应该还是spark），然后后端的存储，基于hive的数据分析查询，然后根据业务的模型训练平台。</p>
-<p><img alt="现代后端数据处理DAG形态" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicBl1URGdBwHlF1kdO49kyHibianTnSE9KqmxOr1G81OG9ZgVX4ITzzljw/640?wx_fmt=png"></p>
+<p><img alt="现代后端数据处理DAG形态" src="https://pic1.zhimg.com/80/v2-2d917d19d2ac06c55fb6698118d4afbc_1440w.jpg"></p>
 <p>现代的后端数据处理越来越偏向于DAG的形态，Spark不说了，DAG是最大特色；神经网络本身也可以看作是一个DAG（RNN其实也可以看作无数个单向DNN的组合）；tensorflow也是强调其Graph是DAG，另外编程模式上，<strong>Reactive编程</strong>也很受追捧。</p>
 <p>其实<strong>DAG的形态重点强调</strong>的就是<strong>数据本身是immutable（不可修改）</strong>，只能<strong>transform后成为新的数据</strong>进入下一环。这个思维其实可以贯穿到现代后台系统设计的每个环节，比如trakcing、analytics、数据表设计、microservice等等。</p>
 <p><em>参考yelp的数据管道的文章，早年的数据流控制已经达到了那个效果，只是不停的替换工具。</em></p>
 <p>无论如何，数据，数据的跟踪tracking，数据的流向，是现代后台系统的核心问题，只有data flow和data pipeline清晰了，整个后台架构才会清楚。</p>
 <h2>DB &amp; Storage</h2>
-<p><img alt="Database 分类" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicY3GibENZRwqyckPsFZQ34Sx2o7IZkU7Y7j0wribPX1VM1YB5t4rTyH5Q/640?wx_fmt=png"></p>
+<p><img alt="Database 分类" src="https://pic1.zhimg.com/80/v2-68ebb74553bfe58b8e9d45a4cb50e0f0_1440w.jpg"></p>
 <p>有趣的是曾经看到一篇文章是aws CTO谈的一些内容，其中印象深刻是：<strong>如果你的用户还不到100万，就别折腾了，无脑使用mysql吧</strong></p>
 <p>在2015年之前的一个趋势是不少公司使用mysql作为数据存储，但是把indexing放在外部去做。这个思路最早似乎是friendster提出的，后来uber也模仿这种做法设计了自己的数据库schemaless。然而随着postgreSQL的普及(postgreSQL支持对json的索引)，这种做法是否还有意义就值得商榷了。</p>
 <p>列存储的一个重要领域是时序数据库，物联网用得多。其特色是大量写入，只增不改（不修改数据），但是读的次数相对于很少</p>
@@ -182,18 +182,18 @@
 <li>服务发现</li>
 <li>微服务的配置和部署</li>
 </ul>
-<p><img alt="Monolithic vs Microservice" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicKSYTdmlpiaRNtRRia6bbK7FPT4YicjcnhuVRn8UKptq7ibMKKoDNhibc8yQ/640?wx_fmt=png"></p>
+<p><img alt="Monolithic vs Microservice" src="https://pic2.zhimg.com/80/v2-f9669af0efd0a133fa58ce0a30813c01_1440w.jpg"></p>
 <p>这里要说并不是微服务解决一切，热门的Python Django尽管有restful-framework，但是它实际上是一个典型的Monolithic体系。对很多核心业务，其实未必要拆开成微服务。</p>
 <h2>Docker 入门</h2>
 <p>以前的开发环境,VM之前</p>
-<p><img alt="Before VM" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkic6JXY64mXCOiccgWST5XicbvtIah33nSMsYicwYTZbIhovTJW7WxXniaVuQ/640?wx_fmt=png"></p>
+<p><img alt="Before VM" src="https://pic4.zhimg.com/80/v2-e15175f3e3a611aa2314df864a915f43_1440w.jpg"></p>
 <p>也有直接在远程服务器安装环境后，多人共同登录远端开发，各自使用一个端口避免冲突…. 实际上这种土法炼钢的形态，在2019年的今天仍然在国内非常普及。</p>
 <p>以前的开发环境,Docker之前</p>
-<p><img alt="Before Docker" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicpdt8UJicfibQlNZLlVBsOmlZicwicbia4pKan0iaXmiawCdj1xFSJPwFNanng/640?wx_fmt=png"></p>
+<p><img alt="Before Docker" src="https://pic3.zhimg.com/80/v2-958630279c89bde1977993b38bd5f33a_1440w.jpg"></p>
 <p>对比</p>
-<p><img alt="Server/VM/Dokcer" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicMBa408GKKcQEbLW2iaEqYU7zbReDlSoqwfXYombHoh3zNic5dIs65RsQ/640?wx_fmt=png"></p>
+<p><img alt="Server/VM/Dokcer" src="https://pic1.zhimg.com/80/v2-34300341c5a98dcf80a857f30e8d5e6c_1440w.jpg"></p>
 <p>Kubernetes</p>
-<p><img alt="Kubernetes Dokcer" src="https://mmbiz.qpic.cn/mmbiz_png/j3gficicyOvaum2YxibT9cvOg7D94zicHpkicMBa408GKKcQEbLW2iaEqYU7zbReDlSoqwfXYombHoh3zNic5dIs65RsQ/640?wx_fmt=png"></p>
+<p><img alt="Kubernetes Dokcer" src="https://pic3.zhimg.com/80/v2-03fbbb243474fa5bf70b75ab81c0d2ce_1440w.jpg"></p>
 <p>最后Kubernetes这里大概说说host-pod-container的关系，一个host可以是物理机或者vm，pod不是一个docker，而是可以看作有一个ip的...（不知道怎么形容），总之一个pod可以包括多个container(docker)，pod之中的container可以共享该pod的资源（ip，storage等）。不过现实中似乎大多是一个pod对一个container。</p>
             </div>
             <!-- /.entry-content -->
