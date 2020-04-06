@@ -1,124 +1,105 @@
-<!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
-<head>
-    <title>django rest framework - 米de世界</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>米de世界</title>
+		<meta name="description" content="">
+		<meta name="author" content="Miinec">
+
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
+
+
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">米de世界</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="/category/du-shu-bi-ji.html">读书笔记</a></li>
+							<li ><a href="/category/ji-zhu.html">技术</a></li>
+							<li ><a href="/category/jing-ji-he-jin-rong.html">经济和金融</a></li>
+							<li class="active"><a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a></li>
+							<li ><a href="/category/shang-ye.html">商业</a></li>
+							<li ><a href="/category/she-hui-ke-xue.html">社会科学</a></li>
+
+						<li><label>Links</label></li>
 
 
 
-<link rel="canonical" href="/pages/20190207.html">
+						<li><label>Social</label></li>
+							<li><a href="http://github.com/miinec/">github</a></li>
+					</ul>	
+				</aside>
 
-        <meta name="author" content="Mii" />
-        <meta name="keywords" content="django,框架" />
-        <meta name="description" content="django框架" />
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">米de世界</a></h1>
+						</li>
+					</ul>
 
-        <meta property="og:site_name" content="米de世界" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="django rest framework"/>
-        <meta property="og:url" content="/pages/20190207.html"/>
-        <meta property="og:description" content="django框架"/>
-        <meta property="article:published_time" content="2019-02-07" />
-            <meta property="article:section" content="框架和工具" />
-            <meta property="article:tag" content="django" />
-            <meta property="article:tag" content="框架" />
-            <meta property="article:author" content="Mii" />
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="/category/du-shu-bi-ji.html">读书笔记</a></li>
+								<li ><a href="/category/ji-zhu.html">技术</a></li>
+								<li ><a href="/category/jing-ji-he-jin-rong.html">经济和金融</a></li>
+								<li class="active"><a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a></li>
+								<li ><a href="/category/shang-ye.html">商业</a></li>
+								<li ><a href="/category/she-hui-ke-xue.html">社会科学</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
 
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-
-
-
-</head>
-<body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">
-米de世界            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="/category/du-shu-bi-ji.html">读书笔记</a>
-                        </li>
-                        <li >
-                            <a href="/category/ji-zhu.html">技术</a>
-                        </li>
-                        <li >
-                            <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
-                        </li>
-                        <li class="active">
-                            <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
-                        </li>
-                        <li >
-                            <a href="/category/shang-ye.html">商业</a>
-                        </li>
-                        <li >
-                            <a href="/category/she-hui-ke-xue.html">社会科学</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/pages/20190207.html"
-                       rel="bookmark"
-                       title="Permalink to django rest framework">
-                        django rest framework
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2019-02-07T00:00:00+08:00"> 周四 07 二月 2019</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/django.html">django</a>
-        /
-	<a href="/tag/kuang-jia.html">框架</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p><em>原OneNote中得djaongo框架归档，不再做整理。</em></p>
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>django rest framework</h2>
+	<p><em>原OneNote中得djaongo框架归档，不再做整理。</em></p>
 <p><a href="https://www.bilibili.com/video/av28871471/">视频</a><br>
 <a href="https://www.cnblogs.com/wupeiqi/articles/7805382.html">文字</a></p>
 <h2>django FBV,CBV</h2>
@@ -400,220 +381,94 @@ wsgiref,werkzeug,是wsgi协议的一个模块，本质是一个socket服务端�
 tornado自己实现了一套。<br>
 uwsgi,djaong<br>
 不同模块，协议规范的参数不同</p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
+	<hr/>
+	<h6>Written by <a href="/author/mii.html">Mii</a> in <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a> on 周四 07 二月 2019. Tags: <a href="/tag/django.html">django</a>, <a href="/tag/kuang-jia.html">框架</a>, </h6>
+</article>
 
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-<!-- Sidebar -->
-<section class="well well-sm">
-  <ul class="list-group list-group-flush">
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+								</ul>
+							</div>
 
-<!-- Sidebar/Social -->
-<li class="list-group-item">
-  <h4>Social</h4>
-  <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="http://github.com/miinec/"><i class="fa fa-github-square fa-lg"></i> github</a></li>
-  </ul>
-</li>
-<!-- End Sidebar/Social -->
-
-<!-- Sidebar/Recent Posts -->
-<li class="list-group-item">
-  <h4>Recent Posts</h4>
-  <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="/pages/20200112.html">redis 命令参考</a></li>
-    <li class="list-group-item"><a href="/pages/20200107.html">机器学习交易系统</a></li>
-    <li class="list-group-item"><a href="/pages/20191231.html">品牌系统与 Supreme 的成功之道</a></li>
-    <li class="list-group-item"><a href="/pages/20190920.html">架构设计实践思路：什么是架构，怎么画架构图</a></li>
-    <li class="list-group-item"><a href="/pages/20190914.html">从技术演变的角度看互联网后台架构</a></li>
-  </ul>
-</li>
-<!-- End Sidebar/Recent Posts -->
-
-<!-- Sidebar/Categories -->
-<li class="list-group-item">
-  <h4>Categories</h4>
-  <ul class="list-group" id="categories">
-    <li class="list-group-item">
-      <a href="/category/du-shu-bi-ji.html">读书笔记</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/category/ji-zhu.html">技术</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/category/jing-ji-he-jin-rong.html">经济和金融</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/category/kuang-jia-he-gong-ju.html">框架和工具</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/category/shang-ye.html">商业</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/category/she-hui-ke-xue.html">社会科学</a>
-    </li>
-  </ul>
-</li>
-<!-- End Sidebar/Categories -->
-
-<!-- Sidebar/Tag Cloud -->
-<li class="list-group-item">
-  <a href="/"><h4>Tags</h4></a>
-  <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-2">
-      <a href="/tag/an-li.html">案例</a>
-    </li>
-    <li class="list-group-item tag-1">
-      <a href="/tag/chan-pin.html">产品</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/crm.html">CRM</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/django.html">django</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/docker.html">docker</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/fang-fa-lun.html">方法论</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/fu-za-xi-tong.html">复杂系统</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/gong-ye-hu-lian-wang.html">工业互联网</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/gui-fan.html">规范</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/hong-guan-jing-ji.html">宏观经济</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/huo-bi.html">货币</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/jia-gou.html">架构</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/jiao-yi.html">交易</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/jin-rong.html">金融</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/kong-zhi-lun.html">控制论</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/kuang-jia.html">框架</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/li-lun.html">理论</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/nei-rong.html">内容</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/python.html">python</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/qi-quan-ding-jie.html">期权定价</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/redis.html">redis</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/rong-qi-hua.html">容器化</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/she-ji.html">设计</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/she-jiao.html">社交</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/sheng-tai.html">生态</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/shu-ju.html">数据</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/tou-zi.html">投资</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/wei-fu-wu.html">微服务</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/wen-hua.html">文化</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong.html">系统</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/xi-tong-lun.html">系统论</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/xin-li.html">心理</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/xin-xi-lun.html">信息论</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/ying-xiao.html">营销</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/yun-wei.html">运维</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/zheng-ce.html">政策</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/zheng-zhi.html">政治</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/zhong-jian-jian.html">中间件</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/zi-xun.html">资讯</a>
-    </li>
-  </ul>
-</li>
-<!-- End Sidebar/Tag Cloud -->
-  </ul>
-</section>
-<!-- End Sidebar -->            </aside>
-        </div>
-    </div>
-</div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2020 Miinec
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+									<li><a href="/tag/营销.html" class="tag-2">营销</a></li>
+									<li><a href="/tag/期权定价.html" class="tag-4">期权定价</a></li>
+									<li><a href="/tag/控制论.html" class="tag-4">控制论</a></li>
+									<li><a href="/tag/架构.html" class="tag-2">架构</a></li>
+									<li><a href="/tag/理论.html" class="tag-4">理论</a></li>
+									<li><a href="/tag/生态.html" class="tag-4">生态</a></li>
+									<li><a href="/tag/资讯.html" class="tag-4">资讯</a></li>
+									<li><a href="/tag/crm.html" class="tag-4">CRM</a></li>
+									<li><a href="/tag/文化.html" class="tag-4">文化</a></li>
+									<li><a href="/tag/交易.html" class="tag-4">交易</a></li>
+									<li><a href="/tag/设计.html" class="tag-2">设计</a></li>
+									<li><a href="/tag/python.html" class="tag-2">python</a></li>
+									<li><a href="/tag/货币.html" class="tag-4">货币</a></li>
+									<li><a href="/tag/心理.html" class="tag-4">心理</a></li>
+									<li><a href="/tag/内容.html" class="tag-4">内容</a></li>
+									<li><a href="/tag/社交.html" class="tag-4">社交</a></li>
+									<li><a href="/tag/复杂系统.html" class="tag-4">复杂系统</a></li>
+									<li><a href="/tag/系统.html" class="tag-4">系统</a></li>
+									<li><a href="/tag/docker.html" class="tag-4">docker</a></li>
+									<li><a href="/tag/框架.html" class="tag-4">框架</a></li>
+									<li><a href="/tag/政策.html" class="tag-4">政策</a></li>
+									<li><a href="/tag/规范.html" class="tag-4">规范</a></li>
+									<li><a href="/tag/政治.html" class="tag-4">政治</a></li>
+									<li><a href="/tag/redis.html" class="tag-4">redis</a></li>
+									<li><a href="/tag/信息论.html" class="tag-4">信息论</a></li>
+									<li><a href="/tag/案例.html" class="tag-2">案例</a></li>
+									<li><a href="/tag/工业互联网.html" class="tag-4">工业互联网</a></li>
+									<li><a href="/tag/中间件.html" class="tag-4">中间件</a></li>
+									<li><a href="/tag/投资.html" class="tag-2">投资</a></li>
+									<li><a href="/tag/方法论.html" class="tag-2">方法论</a></li>
+									<li><a href="/tag/金融.html" class="tag-4">金融</a></li>
+									<li><a href="/tag/微服务.html" class="tag-4">微服务</a></li>
+									<li><a href="/tag/django.html" class="tag-4">django</a></li>
+									<li><a href="/tag/运维.html" class="tag-4">运维</a></li>
+									<li><a href="/tag/容器化.html" class="tag-4">容器化</a></li>
+									<li><a href="/tag/系统论.html" class="tag-4">系统论</a></li>
+									<li><a href="/tag/数据.html" class="tag-4">数据</a></li>
+									<li><a href="/tag/产品.html" class="tag-1">产品</a></li>
+									<li><a href="/tag/宏观经济.html" class="tag-4">宏观经济</a></li>
+								</ul>
+							</div>
 
 
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="http://github.com/miinec/">github</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
 
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
 
-</body>
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>
