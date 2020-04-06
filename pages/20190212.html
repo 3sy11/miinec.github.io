@@ -149,10 +149,10 @@ lo        Link encap:Local Loopback
 
 
 <h2>docker的基本组成</h2>
-<p><img alt="1.png" src="https://upload-images.jianshu.io/upload_images/18785907-cd0d18528e8fc3b3.png"></p>
-<p><img alt="2.png" src="https://upload-images.jianshu.io/upload_images/18785907-15a8f0ebd26ed9ea.png"></p>
-<p><img alt="3.png" src="https://upload-images.jianshu.io/upload_images/18785907-72ae463d4aeda9b5.png"></p>
-<p><img alt="4.png" src="https://upload-images.jianshu.io/upload_images/18785907-20c881e30e76d2f0.png"></p>
+<p><img alt="1.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/1.png"></p>
+<p><img alt="2.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/2.png"></p>
+<p><img alt="3.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/3.png"></p>
+<p><img alt="4.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/4.png"></p>
 <p>docker容器内安装程序  </p>
 <div class="highlight"><pre><span></span><code>docker run learn/tutorial apt-get install -y ping  
 docker run python3 pip install NetEase-MusicBox  
@@ -172,9 +172,9 @@ chroot 文件系统隔离</p>
 代码语言的封装，是代码隔离<br>
 操作系统资源隔离，进程，网络，文件系统等</p>
 <p>分为以下几种隔离</p>
-<p><img alt="5.png" src="https://upload-images.jianshu.io/upload_images/18785907-7ac7db39c68d9acf.png"></p>
-<p><img alt="21.png" src="https://upload-images.jianshu.io/upload_images/18785907-dc794709f0ab959f.png"></p>
-<p><img alt="22.png" src="https://upload-images.jianshu.io/upload_images/18785907-1c84f9c3780694aa.png"></p>
+<p><img alt="5.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/5.png"></p>
+<p><img alt="21.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/21.png"></p>
+<p><img alt="22.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/22.png"></p>
 <p>使用了control group控制组来实现隔离，其中包括资源限制，优先级设定，资源计量，资源控制。<br>
 最终实现了，文件系统隔离：每个容器都有自己的root文件系统，进程隔离：每个容器都在自己的进程中，网络隔离：每个容器间的新网络接口和IP地址都是分开的，资源隔离和分组，使用cgroup将CPU,内存之类资源独立分配给每个容器。</p>
 <h2>docker安装</h2>
@@ -293,9 +293,9 @@ docker pull</p>
 
 
 <h2>docker C/S模式</h2>
-<p><img alt="6.png" src="https://upload-images.jianshu.io/upload_images/18785907-6053ee9b674fb293.png"></p>
-<p><img alt="7.png" src="https://upload-images.jianshu.io/upload_images/18785907-12ef453bf1c17190.png"></p>
-<p><img alt="8.png" src="https://upload-images.jianshu.io/upload_images/18785907-be10929fa77f9686.png"></p>
+<p><img alt="6.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/6.png"></p>
+<p><img alt="7.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/7.png"></p>
+<p><img alt="8.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/8.png"></p>
 <div class="highlight"><pre><span></span><code>nc -U /var/run/docker.sock
 GET /info HTTP/1.1
 </code></pre></div>
@@ -337,43 +337,43 @@ ENTERYPOINT # CMD类似，只是不会被覆盖，如果需要覆盖，需要dok
 <p>中间层镜像可以用于debug，中间层容器会被缓存，可以使用--no-cacha不使用缓存。docker history 可以查看镜像构建过程。</p>
 <h2>docker容器的网络连接</h2>
 <p>ifconfig中有个docker0的虚拟网桥。提供65534个IP的空间  </p>
-<p><img alt="9.png" src="https://upload-images.jianshu.io/upload_images/18785907-f204261264853bf5.png"></p>
+<p><img alt="9.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/9.png"></p>
 <p>linux的往前管理工具 bridge-utils。<br>
 自动以虚拟网桥docker0  </p>
 <p>容器间链接，默认情况下--icc 默认是可以连接的。直接使用容器内ifconfig的地址就可以ping得通。会随容器重启会变变，所以使用docker run --link 容器名:别名 IMAGE COMMOND来启动。如果需要管理，可以icc设置为false iptables设置为true，就可以通过iptables来实现粒度更细的连接管理。</p>
 <p>ip_forward的流量转发<br>
 iptables</p>
-<p><img alt="10.png" src="https://upload-images.jianshu.io/upload_images/18785907-4c4a7794b8dae078.png"></p>
+<p><img alt="10.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/10.png"></p>
 <h2>数据管理</h2>
 <p>数据卷可以绕过联合文件系统（UFS），为一个嚯多个容器提供访问。目的是为了数据的永久化。第一，独立与dokcer的存在，第二可以是目录，也可以是文件，第三，宿主机，容器间数据共享。  </p>
-<p><img alt="11.png" src="https://upload-images.jianshu.io/upload_images/18785907-76fb76d3897de1e8.png"></p>
-<p><img alt="12.png" src="https://upload-images.jianshu.io/upload_images/18785907-fb253098d65229b7.png"></p>
+<p><img alt="11.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/11.png"></p>
+<p><img alt="12.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/12.png"></p>
 <p>添加数据卷：<br>
 <code>docker run -v ~/container_data:/data -it ubuntu /bin/bash</code><br>
 添加访问权限,只读：<br>
 <code>docker run -v ~/container_data:/data:ro -it ...</code><br>
 在dokcerfile中的<code>VOLUMES ["/data"]</code> 创建数据卷，是不能映射到本地文件目录中，所以不能共享，在容器启动时创建，创建在容器内？</p>
 <p>数据卷容器，<code>docker run --volumes-from 容器名</code> 创建一个挂载了数据卷容器的容器名，之后运行的容器同构volumes-from链接到数据圈容器。这里大概的意思就是创建了一个容器专门管理数据，其他容器来连接这个数据管理容器获得数据，和宿主机无关。</p>
-<p><img alt="13.png" src="https://upload-images.jianshu.io/upload_images/18785907-81ca2ca699861b86.png"></p>
+<p><img alt="13.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/13.png"></p>
 <p>使用数据卷容器，可以避免暴露宿主机的真实目录。当数据卷容器被删除，指向的数据卷目录依然可用。根据inspect信息看，使用数据卷容器的容器，在Volumes值是一个map，映射到docker底层的镜像文件路径。<br>
 数据卷容器，本质是传递配置管理信息。</p>
 <p>数据备份和还原<br>
 <code>docker run --volumes-from 容器名 -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar 数据卷容器</code> 运行一个容器，链接到数据卷容器，同时映射到宿主机的backup目录，然后执行压缩命令。用这种方式实现数据的转译  </p>
-<p><img alt="14.png" src="https://upload-images.jianshu.io/upload_images/18785907-3de021ea9b9a3d05.png"></p>
-<p><img alt="15.png" src="https://upload-images.jianshu.io/upload_images/18785907-28d690434401d4ed.png"></p>
+<p><img alt="14.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/14.png"></p>
+<p><img alt="15.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/15.png"></p>
 <blockquote>
 <p>这个操作还挺骚的</p>
 </blockquote>
 <h2>跨主机链接</h2>
 <p>一是用网桥，二是用open vSwitch 通常用这个，用隧道实现的点对点链接，三是用weave实现。  </p>
-<p><em>k8s方案，或者overlay+consul方案，第二种方案等我写笔记</em></p>
-<p><img alt="16.png" src="https://upload-images.jianshu.io/upload_images/18785907-68859b9fa0676812.png"></p>
-<p><img alt="17.png" src="https://upload-images.jianshu.io/upload_images/18785907-055468e82b88f75f.png"></p>
-<p><img alt="18.png" src="https://upload-images.jianshu.io/upload_images/18785907-10c091a03311bd94.png"></p>
-<p><img alt="19.png" src="https://upload-images.jianshu.io/upload_images/18785907-fddb430a0e6b8aac.png"></p>
-<p><img alt="20.png" src="https://upload-images.jianshu.io/upload_images/18785907-b92a6c588e037351.png"></p>
+<p><em>k8s方案，或者overlay+consul方案，第二种方案等我写笔记.</em></p>
+<p><img alt="16.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/16.png"></p>
+<p><img alt="17.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/17.png"></p>
+<p><img alt="18.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/18.png"></p>
+<p><img alt="19.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/19.png"></p>
+<p><img alt="20.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/20.png"></p>
 <h2>docker的实现和原理</h2>
-<p><em>视频中的第二个将使，主要内容和原理有关，很重要</em></p>
+<p><em>视频中的第二个将使，主要内容和原理有关，很重要.</em></p>
 <p>LXC是container最早使用的引擎，最新的使用libcontanier替换了lxc</p>
 <p>aufs文件系统来管理image和container。 advanced multi layer unification filesystem高级多层联合系统，允许readonly和rw目录并存。<strong>以下三点很重</strong></p>
 <ul>
@@ -381,7 +381,7 @@ iptables</p>
 <li>image类似一个单链表系统，每个image包含一个纸箱parent image的指针。</li>
 <li>没有parent image的image是base image。</li>
 </ul>
-<p><img alt="23.png" src="https://upload-images.jianshu.io/upload_images/18785907-32df090ce3bffdec.png"></p>
+<p><img alt="23.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/23.png"></p>
 <p>基于C/S架构的实现，Server使用UnxiSocket,也可以切换到TcpProtocol</p>
 <p>传统linux的文件系统包含两个filesystem</p>
 <ul>
@@ -389,11 +389,11 @@ iptables</p>
 <li>root file system:rootfs,包含/bin,/usr,/lib,等目录，这些是和kernel无关，和不同的linxu分发版本有关。kernel驻在内存后，就开始挂载rootfs，</li>
 </ul>
 <p>因为docker运行在kernel上，可以支持不同的rootfs的发行版本，busybox是一个轻量级的linux版本，树莓派的docker镜像可以基于这个来创建。</p>
-<p><img alt="24.png" src="https://upload-images.jianshu.io/upload_images/18785907-f4b91f9bb54722a3.png"></p>
-<p><img alt="25.png" src="https://upload-images.jianshu.io/upload_images/18785907-3a1e82a4dad41f23.png"></p>
+<p><img alt="24.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/24.png"></p>
+<p><img alt="25.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/25.png"></p>
 <p>传统linxu启动，rootfs设置为只读，检查完整性以后，设置为只读。docker在启动容器时，也把rootfs设置为只读，然后通过aufs把一个读写的文件系统挂载到rootfs之上，并且把下层文件系统设置成只读，这样构建一个完整的操作系统。aufs就像是把自己一部分的文件系统merge到原有的rootfs，建成新的文件系统，完成修改，像是monkey path。<br>
 按照图示的讲，当内核加载完成，busybox加载上，<strong>docker会把自己的某种系统挂载到busybox之上，并将busybox（rootfs层）设置为只读（传统的可读写的rootfs）</strong>，所以上述的三点中第一点就是这个意思。</p>
-<p><img alt="26.png" src="https://upload-images.jianshu.io/upload_images/18785907-14469838e3cf0284.png"></p>
+<p><img alt="26.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/26.png"></p>
 <p>如果上层想修改下层，docker采用了COW的技术，把文件复制到rw层进行改写，实际用看到的是当前container层中的文件，image中的文件不会被影响。</p>
 <p>docker的技术storage diver,其中包括aufs,还有vfs,devicemapper,btrfs,例如数据卷的使用就是devicemapper。</p>
 <p>automated是和git集成了，自动拉过来构建的</p>
@@ -403,18 +403,18 @@ iptables</p>
 <h3>docker网络模式</h3>
 <p>nat,host,other container,none,overlay,增加参数--net 来配置</p>
 <p>nat，这个就是docker0的方式，if-forward=1,外界无法之间访问容器，端口管理复杂.如果使用-p参数这会在iptable里面进行修改来实现映射。  </p>
-<p><img alt="27.png" src="https://upload-images.jianshu.io/upload_images/18785907-c618b55d2f53fb9c.png"></p>
-<p><img alt="28.png" src="https://upload-images.jianshu.io/upload_images/18785907-4032f28a8c82e142.png"></p>
+<p><img alt="27.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/27.png"></p>
+<p><img alt="28.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/28.png"></p>
 <p>host,共享宿主机的网络，一模一样的网络  </p>
-<p><img alt="29.png" src="https://upload-images.jianshu.io/upload_images/18785907-3626bedca99f49e4.png"></p>
-<p><img alt="30.png" src="https://upload-images.jianshu.io/upload_images/18785907-cdc1edcd86e7c61f.png"></p>
+<p><img alt="29.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/29.png"></p>
+<p><img alt="30.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/30.png"></p>
 <p>other contanier, 多容器共享一个namespace。如果容器间网络频繁可以使用这个模式</p>
-<p><img alt="31.png" src="https://upload-images.jianshu.io/upload_images/18785907-2e52ea3812e0cc32.png"></p>
-<p><img alt="32.png" src="https://upload-images.jianshu.io/upload_images/18785907-64c3fa70b59e2a3d.png"></p>
+<p><img alt="31.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/31.png"></p>
+<p><img alt="32.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/32.png"></p>
 <p>none,无网络配置</p>
 <p>overlay，多主机，实践来看，十分复杂的应用方式</p>
-<p><img alt="33.png" src="https://upload-images.jianshu.io/upload_images/18785907-cc860c91ea0fb02b.png"></p>
-<p><img alt="34.png" src="https://upload-images.jianshu.io/upload_images/18785907-26ec99993b056bf8.png"></p>
+<p><img alt="33.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/33.png"></p>
+<p><img alt="34.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/34.png"></p>
 <h3>存储管理</h3>
 <p>docker支持的graphdriver,aufs(ubuntu),btrfs(coreos),devicemapper(redhat,centos),overlayfs(coreos)</p>
 <p>aufs,挂载点在/var/lib/docker/aufs/mnt/$container_id<br>
@@ -467,13 +467,13 @@ Live Restore Enabled: false
 </code></pre></div>
 
 
-<p><img alt="35.png" src="https://upload-images.jianshu.io/upload_images/18785907-c69f42206e386f0b.png"></p>
+<p><img alt="35.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/35.png"></p>
 <p>图示会有挂载目录的信息，会为每个容器创建一个子目录./diff目录下。/greph目录下存着镜像的关系文件，graph,镜像保管者，json镜像信息，layersize镜像大小信息。</p>
 <p>docker-devicemappper，按需分配（100G但是不一定，磁盘就占了100G），写的时候才占空间，使用元信息控制metadata，挂载在/dev/loop，想一个磁盘块一样的使用。<br>
 缺点是data100G,扩容需要重启，另外有时候unmont释放会释放不了，导致必须重启宿主机来释放。</p>
-<p><img alt="36.png" src="https://upload-images.jianshu.io/upload_images/18785907-fa81737e012b2beb.png"></p>
+<p><img alt="36.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/36.png"></p>
 <p>overlayfs，挂载在/var/lib/docker/overlay/$container_id，和aufs相似。如果大文件修改不同于devicemapper的对部分块实现修改，会非常慢的移动大文件实现。</p>
-<p><img alt="37.png" src="https://upload-images.jianshu.io/upload_images/18785907-31ef3973cf16b243.png"></p>
+<p><img alt="37.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/docker/37.png"></p>
 <p>volume,数据存储，分离数据用的 -v</p>
 <p>注意，在 不同的文件模式下，镜像是相互隔离的。</p>
 <hr>
@@ -499,7 +499,7 @@ docker run -it --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
 <span class="c1"># ff02::1         ip6-allnodes</span>
 <span class="c1"># ff02::2         ip6-allrouters</span>
 <span class="c1"># 127.0.0.1       localhost</span>
-<span class="c1"># ::1               localhost ip6-localhost ip6-loopback</span>
+<span class="c1"># ::1             localhost ip6-localhost ip6-loopback</span>
 <span class="c1"># 86.75.30.9      db-static</span>
 </code></pre></div>
 

@@ -126,7 +126,7 @@
 django.view.View类，url路由需要调用类方法as_vews()来完成映射。<br>
 as_vews() 返回一个封装dispatch()类方法的闭包。dispatch用于在Views类中映射method方法，返回执行函数。重写dispatch可以实现自定义View.http_method_names中的方法，包括get,post,put,patch,delete,head,trace。</p>
 <p>url &gt; view() &gt; dispatch()</p>
-<p><img alt="1.png" src="https://upload-images.jianshu.io/upload_images/18785907-195a5a54cef33b7a.png"></p>
+<p><img alt="1.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/django%20rest%20framework/1.png"></p>
 <h3>django 中间件</h3>
 <ul>
 <li>process_requests  首先，先执行所有的中间件的此方法，完成路由匹配动作</li>
@@ -135,7 +135,7 @@ as_vews() 返回一个封装dispatch()类方法的闭包。dispatch用于在View
 <li>process_excption  报错会执行</li>
 <li>prcess_render_template  如果前三部，返回有render()方法才执行</li>
 </ul>
-<p><img alt="2.png" src="https://upload-images.jianshu.io/upload_images/18785907-2dd6a2c521a6e457.png"></p>
+<p><img alt="2.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/django%20rest%20framework/2.png"></p>
 <p>csrf token其实在1，2步都可以，但是存在需要跳过csrf的情况，而匹配到路由需要在第一步完成，所以是在第二部完成的。  </p>
 <p>对于CBV，需要使用.utils.decorators.method_decorator(csrf_exempt,name='dispatch')来装饰类。方法一，对这个dispatch方法上装饰csrf_exepmt方法。方法二，直接.utils.decorators.method_decorator(csrf_exempt)装饰方法上</p>
 <h3>面向对象</h3>
@@ -214,7 +214,7 @@ as_vews() 返回一个封装dispatch()类方法的闭包。dispatch用于在View
 内置四种认证，一种游览器内置弹窗的登录窗口，一种token，一种会话，一种请求头中包含数据。<br>
 如果验证通过，request.user则存放一个用户信息的元组，request.auth放一个token元组<br>
 匿名用户可以在配置文件中配置</p>
-<p><img alt="3.png" src="https://upload-images.jianshu.io/upload_images/18785907-de4add84adf36923.png"></p>
+<p><img alt="3.png" src="https://github.com/Miinec/imghost/raw/master/%E6%A1%86%E6%9E%B6%E5%92%8C%E5%B7%A5%E5%85%B7/django%20rest%20framework/3.png"></p>
 <p>3.self.check_permissions(request)</p>
 <p>实例化所有权限类，然后遍历对象的has_permission方法。返回true，false<br>
 如果一直是true则通过，如果没有通过，则执行permission_denied，报出异常，认证失败。每一个权限对象，有一个message的参数可以设置，用于失败获取。<br>

@@ -425,7 +425,6 @@
 
 <h3>ZLEXCOUNT key min max</h3>
 <p>对于一个所有成员的<strong>分值都相同的有序集合键</strong> key 来说， 这个命令会返回该集合中， 成员介于 min 和 max 范围内的<strong>元素数量</strong>。</p>
-<p><em>同上</em></p>
 <h3>ZREMRANGEBYLEX key min max</h3>
 <p>对于一个所有成员的<strong>分值都相同的有序集合键</strong> key 来说， 这个命令会<strong>移除</strong>该集合中， 成员介于 min 和 max 范围内的所有元素。</p>
 <h3>ZUNIONSTORE destination numkeys key [key …] [WEIGHTS weight [weight …]] [AGGREGATE SUM|MIN|MAX]</h3>
@@ -437,13 +436,11 @@
 <p>AGGREGATE</p>
 <p>使用 AGGREGATE 选项，你可以指定并集的结果集的聚合方式。</p>
 <p>默认使用的参数 SUM ，可以将所有集合中某个成员的 score 值之 和 作为结果集中该成员的 score 值；使用参数 MIN ，可以将所有集合中某个成员的 最小 score 值作为结果集中该成员的 score 值；而参数 MAX 则是将所有集合中某个成员的 最大 score 值作为结果集中该成员的 score 值。</p>
-<p><em>需要细节</em></p>
 <h3>ZINTERSTORE destination numkeys key [key …] [WEIGHTS weight [weight …]] [AGGREGATE SUM|MIN|MAX]</h3>
 <p>计算给定的<strong>一个或多个有序集的交集</strong>，其中给定 key 的数量必须以 numkeys 参数指定，并将该交集(结果集)储存到 destination 。</p>
 <p>默认情况下，结果集中某个成员的 score 值是所有给定集下该成员 score 值之和.</p>
-<p><em>同上</em></p>
 <h2>HyperLogLog</h2>
-<p><em>基数统计，统计一个集合中，不重复的元素的总数</em></p>
+<p><em>基数统计，统计一个集合中，不重复的元素的总数.</em></p>
 <h3>PFADD key element [element …]</h3>
 <div class="highlight"><pre><span></span><code>redis&gt; PFADD  databases  &quot;Redis&quot;  &quot;MongoDB&quot;  &quot;MySQL&quot;
 (integer) 1
@@ -607,7 +604,7 @@ redis&gt; PFCOUNT  databases
 <li>offset 指定要跳过的元素数量。</li>
 <li>count 指定跳过 offset 个指定的元素之后，要返回多少个对象。</li>
 </ul>
-<p><em>跳过外部键排序</em></p>
+<p><em>跳过外部键排序.</em></p>
 <h3>FLUSHDB</h3>
 <p>清空当前数据库中的所有 key。</p>
 <p>此命令从不失败。</p>
@@ -685,7 +682,6 @@ redis&gt; EXEC             # 执行
 <p>如果在执行 WATCH 命令之后， EXEC 命令或 DISCARD 命令先被执行了的话，那么就不需要再执行 UNWATCH 了。</p>
 <p>因为 EXEC 命令会执行事务，因此 WATCH 命令的效果已经产生了；而 DISCARD 命令在取消事务的同时也会取消所有对 key 的监视，因此这两个命令执行之后，就没有必要执行 UNWATCH 了。</p>
 <h2>Lua脚本</h2>
-<p><em>暂时跳过</em></p>
 <h2>持久化</h2>
 <h3>SAVE</h3>
 <p>SAVE 命令执行一个同步保存操作，将当前 Redis 实例的<strong>所有数据快照(snapshot)以 RDB 文件的形式保存到硬盘</strong>。</p>
@@ -787,7 +783,7 @@ PONG
 <h3>INFO [section]</h3>
 <p>以一种易于解释（parse）且易于阅读的格式，返回关于 Redis 服务器的各种信息和统计数值。</p>
 <p>通过给定可选的参数 section ，可以让命令只返回某一部分的信息</p>
-<p><em>详细见文档</em></p>
+<p><em>详细见文档.</em></p>
 <h3>SHUTDOWN [SAVE|NOSAVE]</h3>
 <p>SHUTDOWN 命令执行以下操作：</p>
 <p>停止所有客户端</p>
@@ -825,7 +821,7 @@ redis 127.0.0.1:6379&gt; CLIENT GETNAME
 <p>如果要被断开连接的客户端正在执行命令，那么当这个命令执行之后，在发送下一个命令的时候，它就会收到一个网络错误，告知它自身的连接已被关闭。</p>
 <h3>CLIENT LIST</h3>
 <p>以人类可读的格式，返回所有连接到服务器的客户端信息和统计数据。</p>
-<p><em>详见文档</em></p>
+<p><em>详见文档.</em></p>
 <h3>CLIENT SETNAME connection-name</h3>
 <p>为当前连接分配一个名字。</p>
 <p>这个名字会显示在 CLIENT LIST 命令的结果中， 用于识别当前正在与服务器进行连接的客户端。</p>
@@ -860,7 +856,6 @@ redis 127.0.0.1:6379&gt; CLIENT GETNAME
 <h3>ECHO message</h3>
 <h3>OBJECT subcommand [arguments [arguments]]</h3>
 <p>OBJECT 命令允许从内部察看给定 key 的 Redis 对象， 它通常用在除错(debugging)或者了解为了节省空间而对 key 使用特殊编码的情况。 当将Redis用作缓存程序时，你也可以通过 OBJECT 命令中的信息，决定 key 的驱逐策略(eviction policies)。</p>
-<p><em>暂时跳过</em></p>
 <h3>SLOWLOG subcommand [argument]</h3>
 <p>Slow log 是 Redis 用来记录查询执行时间的日志系统。</p>
 <h3>MONITOR</h3>
